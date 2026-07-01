@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">پازل جعبه‌چین</string>
+    <string name="title_activity_main">پازل جعبه‌چین</string>
+    <string name="package_name">com.sokoban.puzzle</string>
+    <string name="custom_url_scheme">com.sokoban.puzzle</string>
+</resources>

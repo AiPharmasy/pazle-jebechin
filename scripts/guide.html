@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>راهنمای پازل جعبه‌چین — راه‌حل مراحل و انتشار APK</title>
+<style>
+  @font-face {
+    font-family: 'Vazirmatn';
+    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');
+    font-weight: 400;
+  }
+  @font-face {
+    font-family: 'Vazirmatn';
+    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Bold.woff2') format('woff2');
+    font-weight: 700;
+  }
+  @font-face {
+    font-family: 'Vazirmatn';
+    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Black.woff2') format('woff2');
+    font-weight: 900;
+  }
+
+  body {
+    font-family: 'Vazirmatn', system-ui, sans-serif;
+    background: #fafafa;
+    color: #1a1a1a;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 24px;
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  h1 {
+    color: #dc2626;
+    font-weight: 900;
+    font-size: 32px;
+    border-bottom: 4px solid #f97316;
+    padding-bottom: 12px;
+    margin-top: 40px;
+  }
+
+  h1:first-child { margin-top: 0; }
+
+  h2 {
+    color: #1e3a8a;
+    font-weight: 700;
+    font-size: 22px;
+    margin-top: 32px;
+    border-right: 4px solid #f97316;
+    padding-right: 12px;
+  }
+
+  h3 {
+    color: #374151;
+    font-weight: 700;
+    font-size: 18px;
+    margin-top: 24px;
+  }
+
+  h4 {
+    color: #f97316;
+    font-weight: 700;
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 8px;
+  }
+
+  p { margin: 10px 0; }
+
+  ul, ol { padding-right: 24px; }
+  li { margin: 6px 0; }
+
+  code {
+    background: #1f2937;
+    color: #fbbf24;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    direction: ltr;
+    display: inline-block;
+  }
+
+  pre {
+    background: #1f2937;
+    color: #e5e7eb;
+    padding: 14px 18px;
+    border-radius: 8px;
+    overflow-x: auto;
+    direction: ltr;
+    text-align: left;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  pre code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+  }
+
+  .level-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-right: 4px solid #f97316;
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin: 16px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .level-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .level-number {
+    background: linear-gradient(135deg, #f97316 0%, #dc2626 100%);
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 18px;
+  }
+
+  .level-title {
+    font-weight: 700;
+    font-size: 18px;
+    color: #1f2937;
+  }
+
+  .level-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: #6b7280;
+    margin-bottom: 12px;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .badge-easy { background: #d1fae5; color: #065f46; }
+  .badge-medium { background: #fef3c7; color: #92400e; }
+  .badge-hard { background: #fee2e2; color: #991b1b; }
+  .badge-expert { background: #ede9fe; color: #5b21b6; }
+
+  .solution-box {
+    background: #f9fafb;
+    border: 1px dashed #9ca3af;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 10px 0;
+    direction: ltr;
+    text-align: left;
+  }
+
+  .solution-label {
+    font-size: 13px;
+    color: #6b7280;
+    margin-bottom: 6px;
+    direction: rtl;
+    text-align: right;
+  }
+
+  .lurd {
+    font-family: 'Courier New', monospace;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #dc2626;
+    word-break: break-all;
+  }
+
+  .legend {
+    background: #fef3c7;
+    border-right: 4px solid #f59e0b;
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+
+  .legend strong { color: #92400e; }
+
+  .warn {
+    background: #fee2e2;
+    border-right: 4px solid #dc2626;
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+
+  .warn strong { color: #991b1b; }
+
+  .info {
+    background: #dbeafe;
+    border-right: 4px solid #2563eb;
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+
+  .info strong { color: #1e40af; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+
+  th, td {
+    padding: 10px 14px;
+    text-align: right;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 14px;
+  }
+
+  th {
+    background: #1f2937;
+    color: white;
+    font-weight: 700;
+  }
+
+  tr:last-child td { border-bottom: none; }
+
+  tr:nth-child(even) { background: #f9fafb; }
+
+  .toc {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px 28px;
+    margin: 20px 0 40px 0;
+  }
+
+  .toc h3 { margin-top: 0; color: #dc2626; }
+
+  .toc ol { padding-right: 24px; }
+  .toc li { margin: 6px 0; }
+  .toc a { color: #2563eb; text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+
+  .page-break { page-break-after: always; }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 16px 0;
+  }
+
+  .stat-box {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 14px;
+    text-align: center;
+  }
+
+  .stat-box .num {
+    font-size: 24px;
+    font-weight: 900;
+    color: #dc2626;
+    display: block;
+  }
+
+  .stat-box .label {
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 4px;
+  }
+</style>
+</head>
+<body>
+
+<h1>🎮 راهنمای جامع پازل جعبه‌چین</h1>
+
+<p style="font-size: 17px; color: #6b7280;">
+  نسخه ۱.۰ — شامل راه‌حل تمام ۱۵ مرحله، راهنمای نصب APK و راهنمای انتشار در مارکت
+</p>
+
+<div class="stats-grid">
+  <div class="stat-box"><span class="num">۱۵</span><span class="label">مرحله</span></div>
+  <div class="stat-box"><span class="num">۱۰۰٪</span><span class="label">قابل حل</span></div>
+  <div class="stat-box"><span class="num">آفلاین</span><span class="label">بدون نیاز به اینترنت</span></div>
+</div>
+
+<div class="toc">
+  <h3>📋 فهرست مطالب</h3>
+  <ol>
+    <li><a href="#intro">معرفی بازی</a></li>
+    <li><a href="#rules">قوانین بازی</a></li>
+    <li><a href="#legend">راهنمای نشانه‌های راه‌حل (LURD)</a></li>
+    <li><a href="#solutions">راه‌حل تمام ۱۵ مرحله</a></li>
+    <li><a href="#install-apk">نصب APK روی گوشی</a></li>
+    <li><a href="#publish">انتشار در مارکت‌های ایرانی</a></li>
+    <li><a href="#rebuild">ساخت مجدد APK پس از تغییرات</a></li>
+  </ol>
+</div>
+
+<h1 id="intro">۱. معرفی بازی</h1>
+
+<p>
+  «پازل جعبه‌چین» یک بازی فکری سبک سُوکوبان است که در آن بازیکن باید جعبه‌ها را به سمت نقاط هدف هل دهد.
+  تمام ۱۵ مرحله بازی از مجموعه معروف <strong>Microban</strong> اثر <strong>David W. Skinner</strong> انتخاب شده‌اند —
+  این مجموعه یکی از شناخته‌شده‌ترین مجموعه‌های سُوکوبان در جهان است که برای مبتدیان طراحی شده اما چالش‌های واقعی ارائه می‌دهد.
+</p>
+
+<p>
+  تمام مراحل با الگوریتم جستجوی BFS تأیید حل‌شدنی هستند و راه‌حل بهینه (کوتاه‌ترین) هر مرحله استخراج شده است.
+  این راهنما شامل راه‌حل هر مرحله به فرمت LURD استاندارد است.
+</p>
+
+<h1 id="rules">۲. قوانین بازی</h1>
+
+<ul>
+  <li>بازیکن (دایره آبی با چهره) می‌تواند در ۴ جهت (بالا، پایین، چپ، راست) حرکت کند.</li>
+  <li>جعبه‌ها (مربع‌های نارنجی) فقط <strong>هل داده می‌شوند</strong> — بازیکن باید پشت آن‌ها بایستد و به سمت هدف هلشان دهد.</li>
+  <li>بازیکن نمی‌تواند جعبه را <strong>بکشد</strong> — فقط هل دادن مجاز است.</li>
+  <li>جعبه‌ای که به یک گوشه (دو دیوار مجاور) هل داده شود، دیگر قابل حرکت نیست — باید از دکمه «برگشت» استفاده کنید.</li>
+  <li>وقتی همه جعبه‌ها روی نقاط هدف (حلقه‌های طلایی) قرار گیرند، مرحله تمام می‌شود.</li>
+  <li>جعبه‌ای که روی هدف قرار گیرد سبز با تیک ✓ می‌شود.</li>
+</ul>
+
+<h1 id="legend">۳. راهنمای نشانه‌های راه‌حل (LURD)</h1>
+
+<p>
+  راه‌حل‌ها به فرمت استاندارد <strong>LURD</strong> نوشته شده‌اند که در جامعه سُوکوبان رایج است:
+</p>
+
+<div class="legend">
+  <strong>نشانه‌ها:</strong>
+  <ul style="margin: 8px 0;">
+    <li><code>u</code> = حرکت به بالا (بدون هل دادن جعبه) — <strong>Uppercase U</strong> = هل دادن جعبه به بالا</li>
+    <li><code>d</code> = حرکت به پایین — <strong>D</strong> = هل دادن جعبه به پایین</li>
+    <li><code>l</code> = حرکت به چپ — <strong>L</strong> = هل دادن جعبه به چپ</li>
+    <li><code>r</code> = حرکت به راست — <strong>R</strong> = هل دادن جعبه به راست</li>
+  </ul>
+</div>
+
+<div class="info">
+  <strong>نکته:</strong> تعداد کل حرکت‌ها = طول رشته LURD. تعداد هل دادن‌ها = تعداد حروف بزرگ.
+  راه‌حل‌های ارائه‌شده <strong>بهینه</strong> هستند (کمترین تعداد حرکت ممکن).
+</div>
+
+<h1 id="solutions">۴. راه‌حل تمام ۱۵ مرحله</h1>
+
+<p>در جدول زیر خلاصه‌ای از تمام مراحل آمده است:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>شماره</th>
+      <th>نام</th>
+      <th>سختی</th>
+      <th>Par (۳ ستاره)</th>
+      <th>بهینه</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>۱</td><td>آغاز</td><td>آسان</td><td>۳۵</td><td>۳۳</td></tr>
+    <tr><td>۲</td><td>گوشه</td><td>آسان</td><td>۱۸</td><td>۱۶</td></tr>
+    <tr><td>۳</td><td>پل</td><td>آسان</td><td>۴۵</td><td>۴۱</td></tr>
+    <tr><td>۴</td><td>صلیب</td><td>متوسط</td><td>۳۰</td><td>۲۵</td></tr>
+    <tr><td>۵</td><td>چرخش</td><td>متوسط</td><td>۴۰</td><td>۳۵</td></tr>
+    <tr><td>۶</td><td>مارپیچ کوچک</td><td>متوسط</td><td>۳۵</td><td>۳۰</td></tr>
+    <tr><td>۷</td><td>اتاقک‌ها</td><td>متوسط</td><td>۹۰</td><td>۷۸</td></tr>
+    <tr><td>۸</td><td>جیب</td><td>سخت</td><td>۵۵</td><td>۵۱</td></tr>
+    <tr><td>۹</td><td>مسیر باریک</td><td>سخت</td><td>۸۰</td><td>۷۱</td></tr>
+    <tr><td>۱۰</td><td>نگاه</td><td>سخت</td><td>۶۰</td><td>۵۶</td></tr>
+    <tr><td>۱۱</td><td>سه‌گانه</td><td>سخت</td><td>۲۵</td><td>۲۱</td></tr>
+    <tr><td>۱۲</td><td>پره‌دار</td><td>سخت</td><td>۴۵</td><td>۴۱</td></tr>
+    <tr><td>۱۳</td><td>صف</td><td>دشوار</td><td>۱۷۵</td><td>۱۵۶</td></tr>
+    <tr><td>۱۴</td><td>دیوار</td><td>دشوار</td><td>۸۵</td><td>۷۶</td></tr>
+    <tr><td>۱۵</td><td>استاد</td><td>دشوار</td><td>۱۹۰</td><td>۱۶۹</td></tr>
+  </tbody>
+</table>
+
+<h3>راه‌حل مرحله به مرحله</h3>
+
+<div class="level-card">
+  <div class="level-header">
+    <span class="level-number">۱</span>
+    <span class="level-title">آغاز</span>
+  </div>
+  <div class="level-meta">
+    <span class="badge badge-easy">آسان</span>
+    <span>Par: ۳۵ حرکت</span>
+    <span>بهینه: ۳۳ حرکت</span>
+    <span>منبع: Microban #1</span>
+  </div>
+  <p>یک مرحله آموزشی کوچک با ۲ جعبه و ۲ هدف. یکی از جعبه‌ها از ابتدا روی هدف است.</p>
+  <div class="solution-box">
+    <div class="solution-label">راه‌حل بهینه (۳۳ حرکت):</div>
+    <div class="lurd">dlUrrrdLullddrUluRuulDrddrruLdlUU</div>
+  </div>
+</div>
+
+<div class="level-card">
+  <div class="level-header">
+    <span class="level-number">۲</span>
+    <span class="level-title">گوشه</span>
+  </div>
+  <div class="level-meta">
+    <span class="badge badge-easy">آسان</span>
+    <span>Par: ۱۸ حرکت</span>
+    <span>بهینه: ۱۶ حرکت</span>
+    <span>منبع: Microban #2</span>
+  </div>
+  <p>یک چیدمان کوچک متقارن با چند جعبه از پیش روی هدف.</p>
+  <div class="solution-box">
+    <div class="solution-label">راه‌حل بهینه (۱۶ حرکت):</div>
+    <div class="lurd">rddLruulDuullddR</div>
+  </div>
+</div>
+
+<div class="level-card">
+  <div class="level-header">
+    <span class="level-number">۳</span>
+    <span class="level-title">پل</span>
+  </div>
+  <div class="level-meta">
+    <span class="badge badge-easy">آسان</span>
+    <span>Par: ۴۵ حرکت</span>
+    <span>بهینه: ۴۱ حرکت</span>
+    <span>منبع: Microban #3</span>
+  </div>
+  <p>چیدمان نامتقارن با شکل نامنظم — نیاز به برنامه‌ریزی چند مرحله‌ای.</p>
+  <div class="solution-box">
+    <div class="solution-label">راه‌حل بهینه (۴۱ حرکت):</div>
+    <div class="lurd">ruuLLLulDrrrrddlUruLLLddllluurRDrdLuuurDD</div>
+  </div>
+</div>
+
+<div class="level-card">
+  <div class="level-header">
+    <span class="level-number">۴</span>
+    <span class="level-title">صلیب</span>
+  </div>
+  <div class="level-meta">
+    <span class="badge badge-medium">متوسط</span>
+    <span>Par: ۳۰ حرکت</span>
+    <span>بهینه: ۲۵ حرکت</span>
+    <span>منبع: Microban #5</span>
+  </div>
+  <p>چیدمان متقارن به شکل صلیب با ۴ هدف و ۴ جعبه.</p>
+  <div class="solution-box">
+    <div class="solution-label">راه‌حل بهینه (۲۵ حرکت):</div>
+    <div class="lurd">LuRllDrdRdrruuLLdlUddlluR</div>
+  </div>
+</div>
+
+<div class="level-card">
+  <div class="level-header">
+    <span class="level-number">۵</span>
+    <span class="level-title">چرخش</span>
+  </div>
+  <div class="level-meta">
+    <span class="badge badge-medium">متوسط</span>
+    <span>Par: ۴۰ حرکت</span>
+    <span>بهینه: ۳۵ حرکت</span>
+    <span>منبع: Microban #24</span>
+  </div>
+  <p>چیدمان نامتقارن که نیاز به دور زدن دور جعبه‌ها دارد.</p>
+  <div class="solution-box">
+    <div class="solution-label">راه‌حل بهینه (۳۵ حرکت):</div>
+    <div class="lurd">ullDDlddrruLuuurrdLulDDDullddrRuulD</div>
+  </div>
+</div>
+
+<div class="level-card">
+  <div class="level-header">
+    <span class="level-number">۶</span>
+    <span class="level-title">مارپیچ کوچک</span>
+  </div>
+  <div class="level-meta">
+    <span class="badge badge-medium">متوسط</span>
+    <span>Par: ۳۵ حرکت</span>
+    <span>بهینه: ۳۰ حرکت</span>
+    <span>منبع: Microban #9</span>
+  </div>
+  <p>چیدمان مارپیچ کوچک — باید جعبه‌ها را با ترتیب درست هل دهید.</p>
+  <div class="solution-box">
+    <div class="solution-label">راه‌حل بهینه (۳۰ حرکت):</div>
+    <div class="lurd">urrDulldRdRluurDrDDlUruLdlUruL</div>
+  </div>
+</div>
+
+<div class="level-card">
+  <div class="level-header">
+    <span class="level-number">۷</span>
+    <span class="level-title">اتاقک‌ها</span>
+  </div>
+  <div class="level-meta">
+    <span class="badge badge-medium">متوسط</span>
+    <span>Par: ۹۰ حرکت</span>
+    <span>بهینه: ۷۸ حرکت</span>
+    <span>منبع: Microban #11</span>
+  </div>
+  <p>چیدمان عمودی با اتاقک‌های مجزا — مرحله‌ای طولانی نیاز به تمرکز.</p>
+  <div class="solution-box">
+    <div class="solution-label">راه‌حل بهینه (۷۸ حرکت):</div>
+    <div class="lurd">ulllddddrrrruLUlDrdLLLuuuurrrDDDldllullddrUluRdrrrurrdLLLLUllddrUrrruuruullldD</div>
+  </div>
+</div>
+
+<div class="level-card">
+  <div class="level-header">
+    <span class="level-number">۸</span>
+    <span class="level-title">جیب</span>
+  </div>
+  <div class="level-meta">
+    <span class="badge badge-hard">سخت</span>
+    <span>Par: ۵۵ حرکت</span>
+    <span>بهینه: ۵۱ حرکت</span>
+    <span>منبع: Microban #14</span>
+  </div>
+  <p>مرحله‌ای کوچک اما فریبنده — جعبه‌ای از قبل روی هدف است.</p>
+  <div class="solution-box">
+    <div class="solution-label">راه‌حل بهینه (۵۱ حرکت):</div>
+    <div class="lurd">uulllldddrrUlluurrrrddLLLrrruullDurrddlLdllURRuullD</div>
+  </div>
+</div>
+
+<div class="level-card">
+  <div class="level-header">
+    <span class="level-number">۹</span>
+    <span class="level-title">مسیر باریک</span>
+  </div>
+  <div class="level-meta">
+    <span class="badge badge-hard">سخت</span>
+    <span>Par: ۸۰ حرکت</span>
+    <span>بهینه: ۷۱ حرکت</span>
+    <span>منبع: Microban #18</span>
+  </div>
+  <p>مسیر عمودی باریک با دیوارهای داخلی — باید جعبه‌ها را با دقت بالا ببرید.</p>
+  <div class="solution-box">
+    <div class="solution-label">راه‌حل بهینه (۷۱ حرکت):</div>
+    <div class="lurd">ruuuulllddrRDrUUdllluuurrrrdLdddddlUUruuuLulldddrRdrUUdllluuurrdLurrrdL</div>
+  </div>
+</div>
+
+<div class="level-card">
+  <div class="level-header">
+    <span class="level-number">۱۰</span>
+    <span class="level-title">نگاه</span>
+  </div>
+  <div class="level-meta">
+    <span class="badge badge-hard">سخت</span>
+    <span>Par: ۶۰ حرکت</span>
+    <span>بهینه: ۵۶ حرکت</span>
+    <span>منبع: Microban #23</span>
+  </div>
+  <p>چیدمان نامتقارن با شکل L — باید مسیرهای دور زدن پیدا کنید.</p>
+  <div class="solution-box">
+    <div class="solution-label">راه‌حل بهینه (۵۶ حرکت):</div>
+    <div class="lurd">ruulluRdrdddllUUdrruululldRddrruuruLLrdddlluuRurDDullluR</div>
+  </div>
+</div>
+
+<div class="level-card">
+  <div class="level-header">
+    <span class="level-number">۱۱</span>
+    <span class="level-title">سه‌گانه</span>
+  </div>
+  <div class="level-meta">
+    <span class="badge badge-hard">سخت</span>
+    <span>Par: ۲۵ حرکت</span>
+    <span>بهینه: ۲۱ حرکت</span>
+    <span>منبع: Microban #30</span>
+  </div>
+  <p>سه هدف در یک ردیف — باید سه جعبه را با ترتیب درست ببرید.</p>
+  <div class="solution-box">
+    <div class="solution-label">راه‌حل بهینه (۲۱ حرکت):</div>
+    <div class="lurd">uluurDldddrrUruuLLulD</div>
+  </div>
+</div>
+
+<div class="level-card">
+  <div class="level-header">
+    <span class="level-number">۱۲</span>
+    <span class="level-title">پره‌دار</span>
+  </div>
+  <div class="level-meta">
+    <span class="badge badge-hard">سخت</span>
+    <span>Par: ۴۵ حرکت</span>
+    <span>بهینه: ۴۱ حرکت</span>
+    <span>منبع: Microban #33</span>
+  </div>
+  <p>چیدمان متقارن به شکل پره — هر گوشه یک هدف و یک جعبه دارد.</p>
+  <div class="solution-box">
+    <div class="solution-label">راه‌حل بهینه (۴۱ حرکت):</div>
+    <div class="lurd">ulLrrddlLUdLuluurDldDrrrruulLLrddlluUrrdL</div>
+  </div>
+</div>
+
+<div class="level-card">
+  <div class="level-header">
+    <span class="level-number">۱۳</span>
+    <span class="level-title">صف</span>
+  </div>
+  <div class="level-meta">
+    <span class="badge badge-expert">دشوار</span>
+    <span>Par: ۱۷۵ حرکت</span>
+    <span>بهینه: ۱۵۶ حرکت</span>
+    <span>منبع: Microban #36</span>
+  </div>
+  <p>طولانی‌ترین مرحله — ۵ جعبه در یک ردیف باید به ۵ هدف برسند. فریبنده اما سخت.</p>
+  <div class="solution-box">
+    <div class="solution-label">راه‌حل بهینه (۱۵۶ حرکت):</div>
+    <div class="lurd">dllllllllllluurDldRRRRuLLdlluurDldRRurrdRRuLLLLdRRurrdRRuLLLLdRRlllllluurDldRRRRuLLdlluurDldRRurrrrrrdRRuLLLLLLLLdlluurDrrrdLurrrdLLurrrrdLLLurrrrrrrdLLLLLL</div>
+  </div>
+</div>
+
+<div class="level-card">
+  <div class="level-header">
+    <span class="level-number">۱۴</span>
+    <span class="level-title">دیوار</span>
+  </div>
+  <div class="level-meta">
+    <span class="badge badge-expert">دشوار</span>
+    <span>Par: ۸۵ حرکت</span>
+    <span>بهینه: ۷۶ حرکت</span>
+    <span>منبع: Microban #50</span>
+  </div>
+  <p>چیدمان با شکل L و اهداف در گوشه — نیاز به دور زدن دیوار اصلی.</p>
+  <div class="solution-box">
+    <div class="solution-label">راه‌حل بهینه (۷۶ حرکت):</div>
+    <div class="lurd">llulDDulldRRurrrrrdddlllllUURurrdLLuLDlluRRRdrrurrdddlllllUUruRRRldlllluRRRR</div>
+  </div>
+</div>
+
+<div class="level-card">
+  <div class="level-header">
+    <span class="level-number">۱۵</span>
+    <span class="level-title">استاد</span>
+  </div>
+  <div class="level-meta">
+    <span class="badge badge-expert">دشوار</span>
+    <span>Par: ۱۹۰ حرکت</span>
+    <span>بهینه: ۱۶۹ حرکت</span>
+    <span>منبع: Microban #60</span>
+  </div>
+  <p>سخت‌ترین مرحله — چیدمان پیچیده با دیوارهای داخلی فراوان. برای استادان سُوکوبان!</p>
+  <div class="solution-box">
+    <div class="solution-label">راه‌حل بهینه (۱۶۹ حرکت):</div>
+    <div class="lurd">urrrrrrdddLLulldRRRllDDrddlUUUddLLdlluRRRllUUluurDDDuuuuurrrrrrddDDDuullulldRRRllddrddlUUUddlldlluRRRlluuuuuurrrrrrddDDullulldRRRllddrddlUUUddllluuuuuurrrrrrddDllulldRRR</div>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<h1 id="install-apk">۵. نصب APK روی گوشی</h1>
+
+<h2>فایل‌های تحویلی</h2>
+
+<p>دو فایل APK آماده شده است:</p>
+
+<table>
+  <thead>
+    <tr><th>فایل</th><th>کاربرد</th><th>اندازه</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>pazle-jebechin-v1.0-debug.apk</code></td>
+      <td>نسخه دیباگ — برای تست شخصی</td>
+      <td>~۴.۴ مگابایت</td>
+    </tr>
+    <tr>
+      <td><code>pazle-jebechin-v1.0-release.apk</code></td>
+      <td>نسخه انتشار — امضاشده با keystore تست (برای انتشار در مارکت <strong>باید با keystore خودتان دوباره امضا شود</strong>)</td>
+      <td>~۳.۵ مگابایت</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>روش ۱: انتقال مستقیم (سریع‌ترین)</h2>
+
+<ol>
+  <li>فایل <code>pazle-jebechin-v1.0-debug.apk</code> را به گوشی خود منتقل کنید (بلوتوث، ایمیل، تلگرام، USB).</li>
+  <li>در گوشی به <strong>Settings → Security</strong> بروید و گزینه <strong>Unknown Sources</strong> (منابع ناشناخته) را فعال کنید.</li>
+  <li>فایل APK را در 파일 منیجر گوشی پیدا کرده و روی آن ضربه بزنید.</li>
+  <li>روی <strong>Install</strong> ضربه بزنید و منتظر بمانید تا نصب کامل شود.</li>
+  <li>آیکون «پازل جعبه‌چین» در منوی برنامه‌ها ظاهر می‌شود.</li>
+</ol>
+
+<h2>روش ۲: استفاده از ADB (برای توسعه‌دهندگان)</h2>
+
+<ol>
+  <li>ADB را نصب کنید (بخشی از Android SDK Platform-Tools).</li>
+  <li>گوشی را به حالت <strong>Developer Mode</strong> ببرید و <strong>USB Debugging</strong> را فعال کنید.</li>
+  <li>گوشی را با کابل USB به کامپیوتر وصل کنید.</li>
+  <li>در ترمینال اجرا کنید:</li>
+</ol>
+
+<pre><code>adb install pazle-jebechin-v1.0-debug.apk</code></pre>
+
+<h2>مشخصات فنی APK</h2>
+
+<table>
+  <tbody>
+    <tr><td>Package ID</td><td><code>com.sokoban.puzzle</code></td></tr>
+    <tr><td>نسخه</td><td>1.0 (versionCode: 1)</td></tr>
+    <tr><td>minSdkVersion</td><td>23 (Android 6.0 Marshmallow)</td></tr>
+    <tr><td>targetSdkVersion</td><td>34 (Android 14)</td></tr>
+    <tr><td>compileSdkVersion</td><td>34</td></tr>
+    <tr><td>دسترسی‌ها</td><td><strong>هیچ</strong> — کاملاً آفلاین</td></tr>
+    <tr><td>جهت صفحه</td><td>عمودی (Portrait)</td></tr>
+    <tr><td>معماری</td><td>armeabi-v7a, arm64-v8a, x86, x86_64</td></tr>
+  </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<h1 id="publish">۶. انتشار در مارکت‌های ایرانی</h1>
+
+<h2>گام ۱: ساخت keystore واقعی (یک بار برای همیشه)</h2>
+
+<div class="warn">
+  <strong>هشدار مهم:</strong> keystore که برای انتشار استفاده می‌کنید باید <strong>برای همیشه نگه داشته شود</strong>.
+  اگر آن را گم کنید، دیگر نمی‌توانید نسخه جدیدی از برنامه‌تان را در مارکت منتشر کنید.
+  آن را در چند جای امن کپی کنید (cloud + فلش + هارد اکسترنال).
+</div>
+
+<p>یک keystore واقعی با اطلاعات شخصی خودتان بسازید:</p>
+
+<pre><code>keytool -genkey -v \
+  -keystore my-release-key.jks \
+  -keyalg RSA -keysize 2048 -validity 10000 \
+  -alias my-key-alias \
+  -storepass YOUR_STORE_PASSWORD \
+  -keypass YOUR_KEY_PASSWORD \
+  -dname "CN=Your Name, OU=Game, O=Your Company, L=Tehran, ST=Tehran, C=IR"</code></pre>
+
+<h2>گام ۲: امضای APK با keystore واقعی</h2>
+
+<p>ابتدا APK release بدون امضا را بسازید:</p>
+
+<pre><code>cd /home/z/my-project
+bun run build:android
+cd android
+./gradlew assembleRelease</code></pre>
+
+<p>سپس با keystore خودتان امضا کنید:</p>
+
+<pre><code># ابتدا zipalign
+zipalign -v -p 4 \
+  app/build/outputs/apk/release/app-release-unsigned.apk \
+  app-release-aligned.apk
+
+# سپس امضا
+apksigner sign \
+  --ks my-release-key.jks \
+  --ks-key-alias my-key-alias \
+  --ks-pass pass:YOUR_STORE_PASSWORD \
+  --key-pass pass:YOUR_KEY_PASSWORD \
+  --out pazle-jebechin-v1.0.apk \
+  app-release-aligned.apk
+
+# تأیید امضا
+apksigner verify --print-certs pazle-jebechin-v1.0.apk</code></pre>
+
+<h2>گام ۳: ثبت‌نام در مارکت‌های ایرانی</h2>
+
+<p>مارکت‌های پیشنهادی برای انتشار بازی‌های ایرانی:</p>
+
+<table>
+  <thead>
+    <tr><th>مارکت</th><th>آدرس</th><th>هزینه ثبت‌نام</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>بازار</td><td>cafebazaar.ir</td><td>رایگان</td></tr>
+    <tr><td>مایکت</td><td>myket.ir</td><td>رایگان</td></tr>
+    <tr><td>ایران‌اپس</td><td>iranapps.com</td><td>رایگان</td></tr>
+    <tr><td>جی‌پال</td><td>gpal.ir</td><td>رایگان</td></tr>
+  </tbody>
+</table>
+
+<h3>اطلاعات مورد نیاز برای ثبت در مارکت</h3>
+
+<ul>
+  <li><strong>APK امضاشده</strong> (با keystore خودتان)</li>
+  <li><strong>آیکون اپ</strong>: 512×512 PNG بدون شفافیت</li>
+  <li><strong>تصویر تبلیغاتی</strong>: 1024×500 PNG</li>
+  <li><strong>اسکرین‌شات‌ها</strong>: حداقل ۲ عدد، 320×480 یا بزرگ‌تر</li>
+  <li><strong>توضیحات کوتاه</strong>: ۸۰ کاراکتر</li>
+  <li><strong>توضیحات کامل</strong>: حداکثر ۴۰۰۰ کاراکتر</li>
+  <li><strong>دسته‌بندی</strong>: بازی‌ها → فکری (Puzzle)</li>
+  <li><strong>رده سنی</strong>: همه (3+)</li>
+  <li><strong>سیاست حریم خصوصی</strong>: URL (می‌توانید یک صفحه ساده GitHub Pages بسازید)</li>
+</ul>
+
+<h3>توضیح پیشنهادی برای مارکت</h3>
+
+<pre><code>پازل جعبه‌چین — یک بازی فکری سبک سُوکوبان با ۱۵ مرحله چالش‌برانگیز!
+
+🧩 ۱۵ مرحله از مجموعه معروف Microban
+🎯 ۴ سطح سختی: آسان، متوسط، سخت، دشوار
+⭐ سیستم ستاره — ۳ ستاره برای هر مرحله با حرکات کمتر
+💾 ذخیره خودکار پیشرفت
+🎮 کنترل لمسی + کیبورد
+🚫 کاملاً آفلاین — بدون نیاز به اینترنت
+🆓 بدون تبلیغات و بدون پرداخت درون‌برنامه‌ای
+
+روش بازی: جعبه‌های نارنجی را به سمت نقاط طلایی هل دهید.
+مراقب باشید — جعبه‌ای که به گوشه برود، گیر می‌کند!</code></pre>
+
+<div class="page-break"></div>
+
+<h1 id="rebuild">۷. ساخت مجدد APK پس از تغییرات</h1>
+
+<p>اگر کد بازی را تغییر دادید و می‌خواهید APK جدید بسازید:</p>
+
+<h2>گردش کار کامل</h2>
+
+<pre><code># ۱. تغییر کد در src/
+
+# ۲. تست با dev server
+bun run dev
+# در مرورگر http://localhost:3000 را باز کنید
+
+# ۳. لینت
+bun run lint
+
+# ۴. بیلد static export
+bun run build
+
+# ۵. همگام‌سازی با پروژه اندروید
+npx cap sync android
+
+# ۶. ساخت APK
+cd android
+./gradlew assembleRelease
+
+# ۷. امضا (با keystore خودتان)
+cd ..
+bash scripts/sign-apk.sh
+
+# ۸. APK نهایی در:
+# download/pazle-jebechin-v1.0-release.apk</code></pre>
+
+<h2>تنظیمات پیش از انتشار نسخه جدید</h2>
+
+<p>قبل از ساخت نسخه جدید، شماره نسخه را در فایل <code>android/app/build.gradle</code> افزایش دهید:</p>
+
+<pre><code>defaultConfig {
+    applicationId "com.sokoban.puzzle"
+    minSdkVersion rootProject.ext.minSdkVersion
+    targetSdkVersion rootProject.ext.targetSdkVersion
+    versionCode 2          // ← افزایش دهید
+    versionName "1.1"      // ← افزایش دهید
+}</code></pre>
+
+<div class="info">
+  <strong>قانون مارکت:</strong> هر بار که نسخه جدید در مارکت بارگذاری می‌کنید، <code>versionCode</code> باید
+  از نسخه قبلی بزرگ‌تر باشد. <code>versionName</code> نام نمایشی است (مثل 1.0, 1.1, 2.0).
+</div>
+
+<h2>ساختار پروژه</h2>
+
+<pre><code>/home/z/my-project/
+├── src/
+│   ├── app/
+│   │   ├── page.tsx          # کل منطق بازی و UI
+│   │   ├── layout.tsx        # تنظیمات RTL و metadata
+│   │   └── globals.css
+│   └── lib/
+│       └── levels.ts         # تعریف ۱۵ مرحله + پارسر
+├── android/                  # پروژه اندروید (Capacitor)
+│   └── app/
+│       ├── src/main/
+│       │   ├── AndroidManifest.xml
+│       │   ├── java/com/sokoban/puzzle/MainActivity.java
+│       │   └── assets/public/  # فایل‌های static (build شده)
+│       └── build.gradle       # تنظیمات نسخه و SDK
+├── scripts/
+│   ├── extract-solutions.ts  # استخراج راه‌حل از مراحل
+│   ├── verify-all.ts         # تأیید حل‌شدنی بودن
+│   ├── sign-apk.sh           # امضای APK
+│   └── test-level.sh         # تست راه‌حل در مرورگر
+├── download/
+│   ├── pazle-jebechin-v1.0-debug.apk
+│   ├── pazle-jebechin-v1.0-release.apk
+│   ├── test-keystore.jks      # keystore تست (فقط برای آزمایش)
+│   └── solutions.json         # راه‌حل‌ها به JSON
+├── capacitor.config.ts        # تنظیمات Capacitor
+├── next.config.ts             # static export فعال است
+└── package.json</code></pre>
+
+<h2>اعتبارسنجی مراحل پس از تغییر</h2>
+
+<p>اگر مراحل را تغییر دادید، قبل از ساخت APK حتماً این اسکریپت را اجرا کنید:</p>
+
+<pre><code>npx tsx scripts/extract-solutions.ts</code></pre>
+
+<p>این اسکریپت:</p>
+<ol>
+  <li>تمام مراحل را با BFS حل می‌کند</li>
+  <li>تعداد حرکات بهینه را محاسبه می‌کند</li>
+  <li>راه‌حل هر مرحله را به فرمت LURD استخراج می‌کند</li>
+  <li>فایل <code>download/solutions.json</code> را به‌روزرسانی می‌کند</li>
+  <li>اگر مرحله‌ای قابل حل نباشد، هشدار می‌دهد</li>
+</ol>
+
+<div class="info">
+  <strong>تست در مرورگر:</strong> برای تست راه‌حل‌ها در مرورگر قبل از ساخت APK،
+  اسکریپت <code>scripts/test-level.sh</code> را اجرا کنید (نیازمند اجرای dev server روی پورت 3000).
+</div>
+
+<hr style="margin-top: 60px; border: none; border-top: 2px solid #e5e7eb;">
+
+<p style="text-align: center; color: #6b7280; font-size: 13px; margin-top: 24px;">
+  پازل جعبه‌چین نسخه ۱.۰ — ساخته‌شده با Next.js 16 و Capacitor 8<br>
+  مراحل: مجموعه Microban اثر David W. Skinner<br>
+  راهنمای نسخه ۱.۰ — جولای ۲۰۲۶
+</p>
+
+</body>
+</html>

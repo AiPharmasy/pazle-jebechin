@@ -529,7 +529,8 @@ function GameScreen({
         newBoxes[by][bx] = true
         setBoxes(newBoxes)
         setPlayer({ x: nx, y: ny })
-        setMoves((m) => m + 1)
+        const newMoveCount = moves + 1
+        setMoves(newMoveCount)
 
         const updatedParsed: ParsedLevel = {
           ...parsed,
@@ -538,7 +539,7 @@ function GameScreen({
         }
         if (isWin(updatedParsed)) {
           setWon(true)
-          onWin(level.id, m + 1)
+          onWin(level.id, newMoveCount)
         }
       } else {
         setHistory((h) => [
@@ -549,7 +550,7 @@ function GameScreen({
         setMoves((m) => m + 1)
       }
     },
-    [player, boxes, parsed, won, level.id, onWin]
+    [player, boxes, parsed, won, level.id, onWin, moves]
   )
 
   const undo = useCallback(() => {
@@ -636,7 +637,7 @@ function GameScreen({
     return () => window.removeEventListener('resize', calc)
   }, [parsed.width, parsed.height])
 
-  const stars = won ? calcStars(moves, level.par) : 0
+  const stars: 0 | 1 | 2 | 3 = won ? calcStars(moves, level.par) : 0
 
   return (
     <div className="flex-1 w-full max-w-md flex flex-col px-3 py-4 gap-3">
@@ -1152,7 +1153,7 @@ function WinModal({
 }: {
   level: (typeof LEVELS)[number]
   moves: number
-  stars: 1 | 2 | 3
+  stars: 0 | 1 | 2 | 3
   hasNext: boolean
   onMenu: () => void
   onNext: () => void
