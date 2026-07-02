@@ -1,4 +1,4 @@
-// Verify all 15 levels are solvable + extract solutions
+// Verify all levels are solvable + extract solutions
 import { LEVELS, parseLevel, ParsedLevel } from '../src/lib/levels'
 import * as fs from 'fs'
 
@@ -43,7 +43,7 @@ function isCornerDeadlock(p: ParsedLevel, x: number, y: number): boolean {
   return false
 }
 
-function solve(p: ParsedLevel, timeLimitMs = 60000): { solvable: boolean; moves: number; solution?: string[]; iterations: number } {
+function solve(p: ParsedLevel, timeLimitMs = 30000): { solvable: boolean; moves: number; solution?: string[]; iterations: number } {
   interface State { player: { x: number; y: number }; boxes: string[] }
   const initial: State = { player: p.player, boxes: getBoxes(p) }
   const visited = new Set<string>()
@@ -90,21 +90,19 @@ function solve(p: ParsedLevel, timeLimitMs = 60000): { solvable: boolean; moves:
 
 const results: any[] = []
 
-console.log('Verifying all 15 levels + extracting solutions...')
+console.log('Verifying all 25 levels...')
 console.log('ID | Name          | Par | Optimal | Solvable | Iterations')
 console.log('---|---------------|-----|---------|----------|-----------')
 
 for (const level of LEVELS) {
   const p = parseLevel(level.map)
   const start = Date.now()
-  const result = solve(p, 60000)
+  const result = solve(p, 30000)
   const elapsed = Date.now() - start
   console.log(
     `${String(level.id).padStart(2)} | ${level.name.padEnd(13)} | ${String(level.par).padStart(3)} | ${String(result.moves).padStart(7)} | ${String(result.solvable).padEnd(8)} | ${elapsed}ms (iter: ${result.iterations})`
   )
 
-  // Convert solution to LURD-style: u=up (move), U=up (push)
-  // Re-simulate to determine which moves were pushes
   let lurd = ''
   if (result.solution) {
     let player = p.player
@@ -139,16 +137,18 @@ for (const level of LEVELS) {
   })
 }
 
-// Save to file
 fs.writeFileSync(
   '/home/z/my-project/download/solutions.json',
   JSON.stringify(results, null, 2)
 )
 
-console.log('\n\nDetailed solutions saved to /home/z/my-project/download/solutions.json')
+console.log('\nDetailed solutions saved to /home/z/my-project/download/solutions.json')
 console.log('\n=== Summary ===')
-results.forEach(r => {
-  console.log(`\nLevel ${r.id} (${r.name}) — ${r.difficulty}`)
-  console.log(`  Par: ${r.par}, Optimal: ${r.optimal}, Solvable: ${r.solvable}`)
-  console.log(`  Solution (${r.solution_lurd.length} moves): ${r.solution_lurd}`)
-})
+const solvableCount = results.filter(r => r.solvable).length
+console.log(`Solvable: ${solvableCount}/${LEVELS.length}`)
+if (solvableCount < LEVELS.length) {
+  console.log('UNSOLVABLE LEVELS:')
+  results.filter(r => !r.solvable).forEach(r => {
+    console.log(`  Level ${r.id} (${r.name})`)
+  })
+}

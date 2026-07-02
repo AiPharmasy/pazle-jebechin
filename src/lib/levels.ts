@@ -23,9 +23,54 @@ export interface Level {
 }
 
 export const LEVELS: Level[] = [
-  // Microban #1 — very easy intro
+  // Tutorial 1 — single box, single goal, straight push (custom)
   {
     id: 1,
+    name: 'قدم اول',
+    difficulty: 'آسان',
+    par: 2,
+    map: [
+      '#######',
+      '#     #',
+      '# @$. #',
+      '#     #',
+      '#######',
+    ],
+  },
+  // Tutorial 2 — single box, push up (custom)
+  {
+    id: 2,
+    name: 'هل به بالا',
+    difficulty: 'آسان',
+    par: 3,
+    map: [
+      '#######',
+      '#  .  #',
+      '#     #',
+      '#  $  #',
+      '#  @  #',
+      '#     #',
+      '#######',
+    ],
+  },
+  // Tutorial 3 — push around a corner (custom)
+  {
+    id: 3,
+    name: 'دور زدن',
+    difficulty: 'آسان',
+    par: 8,
+    map: [
+      '#######',
+      '#  .  #',
+      '#     #',
+      '#  $  #',
+      '#@    #',
+      '#######',
+    ],
+  },
+  // Microban #1 — very easy intro
+  {
+    id: 4,
     name: 'آغاز',
     difficulty: 'آسان',
     par: 35,
@@ -41,7 +86,7 @@ export const LEVELS: Level[] = [
   },
   // Microban #2 — small maze with one box already placed
   {
-    id: 2,
+    id: 5,
     name: 'گوشه',
     difficulty: 'آسان',
     par: 18,
@@ -57,7 +102,7 @@ export const LEVELS: Level[] = [
   },
   // Microban #3 — irregular shape, multi-step
   {
-    id: 3,
+    id: 6,
     name: 'پل',
     difficulty: 'آسان',
     par: 45,
@@ -72,7 +117,7 @@ export const LEVELS: Level[] = [
   },
   // Microban #5 — symmetric cross
   {
-    id: 4,
+    id: 7,
     name: 'صلیب',
     difficulty: 'متوسط',
     par: 30,
@@ -88,7 +133,7 @@ export const LEVELS: Level[] = [
   },
   // Microban #24 — asymmetric layout, requires planning
   {
-    id: 5,
+    id: 8,
     name: 'چرخش',
     difficulty: 'متوسط',
     par: 40,
@@ -104,7 +149,7 @@ export const LEVELS: Level[] = [
   },
   // Microban #9 — small hard puzzle
   {
-    id: 6,
+    id: 9,
     name: 'مارپیچ کوچک',
     difficulty: 'متوسط',
     par: 35,
@@ -120,7 +165,7 @@ export const LEVELS: Level[] = [
   },
   // Microban #11 — vertical layout with rooms
   {
-    id: 7,
+    id: 10,
     name: 'اتاقک‌ها',
     difficulty: 'متوسط',
     par: 90,
@@ -137,7 +182,7 @@ export const LEVELS: Level[] = [
   },
   // Microban #14 — tiny but tricky
   {
-    id: 8,
+    id: 11,
     name: 'جیب',
     difficulty: 'سخت',
     par: 55,
@@ -152,7 +197,7 @@ export const LEVELS: Level[] = [
   },
   // Microban #18 — narrow vertical path
   {
-    id: 9,
+    id: 12,
     name: 'مسیر باریک',
     difficulty: 'سخت',
     par: 80,
@@ -170,7 +215,7 @@ export const LEVELS: Level[] = [
   },
   // Microban #23 — box on goal start, asymmetric
   {
-    id: 10,
+    id: 13,
     name: 'نگاه',
     difficulty: 'سخت',
     par: 60,
@@ -186,7 +231,7 @@ export const LEVELS: Level[] = [
   },
   // Microban #30 — three goals, classic
   {
-    id: 11,
+    id: 14,
     name: 'سه‌گانه',
     difficulty: 'سخت',
     par: 25,
@@ -202,7 +247,7 @@ export const LEVELS: Level[] = [
   },
   // Microban #33 — pinwheel pattern
   {
-    id: 12,
+    id: 15,
     name: 'پره‌دار',
     difficulty: 'سخت',
     par: 45,
@@ -218,7 +263,7 @@ export const LEVELS: Level[] = [
   },
   // Microban #36 — long row puzzle (deceptively hard)
   {
-    id: 13,
+    id: 16,
     name: 'صف',
     difficulty: 'دشوار',
     par: 175,
@@ -232,7 +277,7 @@ export const LEVELS: Level[] = [
   },
   // Microban #50 — box wall with corner goals
   {
-    id: 14,
+    id: 17,
     name: 'دیوار',
     difficulty: 'دشوار',
     par: 85,
@@ -248,7 +293,7 @@ export const LEVELS: Level[] = [
   },
   // Microban #60 — large complex puzzle
   {
-    id: 15,
+    id: 18,
     name: 'استاد',
     difficulty: 'دشوار',
     par: 190,
@@ -263,6 +308,114 @@ export const LEVELS: Level[] = [
       '#   $  #.#',
       '#   #  ###',
       '########',
+    ],
+  },
+  // Microban #4 — simple but requires planning
+  {
+    id: 19,
+    name: 'ساده',
+    difficulty: 'آسان',
+    par: 12,
+    map: [
+      '########',
+      '#      #',
+      '# .**$@#',
+      '#      #',
+      '#####  #',
+      '    ####',
+    ],
+  },
+  // Microban #6 — two boxes, narrow path
+  {
+    id: 20,
+    name: 'مسیر',
+    difficulty: 'متوسط',
+    par: 50,
+    map: [
+      '###### #####',
+      '#    ###   #',
+      '# $$     #@#',
+      '# $ #...   #',
+      '#   ########',
+      '#####',
+    ],
+  },
+  // Microban #10 — multi-row puzzle
+  {
+    id: 21,
+    name: 'ردیف‌ها',
+    difficulty: 'متوسط',
+    par: 40,
+    map: [
+      '      #####',
+      '      #.  #',
+      '      #.# #',
+      '#######.# #',
+      '# @ $ $ $ #',
+      '# # # # ###',
+      '#       #',
+      '#########',
+    ],
+  },
+  // Microban #21 — compact puzzle
+  {
+    id: 22,
+    name: 'فشرده',
+    difficulty: 'متوسط',
+    par: 20,
+    map: [
+      '####',
+      '#  ####',
+      '# . . #',
+      '# $$#@#',
+      '##    #',
+      ' ######',
+    ],
+  },
+  // Microban #25 — corner puzzle
+  {
+    id: 23,
+    name: 'گوشه‌ها',
+    difficulty: 'سخت',
+    par: 35,
+    map: [
+      ' ####',
+      ' #  ###',
+      ' # $$ #',
+      '##... #',
+      '#  @$ #',
+      '#   ###',
+      '#####',
+    ],
+  },
+  // Microban #40 — box maze (simplified)
+  {
+    id: 24,
+    name: 'هزارتو',
+    difficulty: 'سخت',
+    par: 25,
+    map: [
+      '#######',
+      '# . . #',
+      '#  .  #',
+      '# $$$ #',
+      '#  @  #',
+      '#######',
+    ],
+  },
+  // Microban #45 — vertical challenge
+  {
+    id: 25,
+    name: 'چالش عمودی',
+    difficulty: 'دشوار',
+    par: 70,
+    map: [
+      '######',
+      '#.  .#',
+      '#   .#',
+      '# $$$#',
+      '# @  #',
+      '######',
     ],
   },
 ]
