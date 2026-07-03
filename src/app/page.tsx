@@ -200,7 +200,7 @@ function MenuScreen({ progress, onPlay }: { progress: Progress; onPlay: () => vo
         <div className="flex items-start gap-3 text-white/90"><span className="w-8 h-8 shrink-0 rounded-full bg-rose-500/30 flex items-center justify-center text-base">⚠️</span><span className="leading-relaxed">مراقب باشید — جعبه‌ای که به گوشه می‌رود، گیر می‌کند!</span></div>
       </div>
 
-      <AdBanner ad={ad} />
+      {ad.show_ad && <AdBanner ad={ad} />}
     </div>
   )
 }
@@ -494,7 +494,7 @@ function GameScreen({ levelIndex, onMenu, onNext, onWin, totalLevels }: {
   )
 }
 
-/* ============== AD BANNER (FIXED: uses ad.link_url, not hardcoded) ============== */
+/* ============== AD BANNER (uses div, not <a>, to prevent auto-open) ============== */
 function AdBanner({ ad }: { ad: AdData }) {
   const handleClick = () => {
     getSound().click()
@@ -503,10 +503,12 @@ function AdBanner({ ad }: { ad: AdData }) {
     }
   }
   return (
-    <a href={ad.link_url} target="_blank" rel="noopener noreferrer"
-      onClick={(e) => { e.preventDefault(); handleClick() }}
-      className="w-full block rounded-2xl overflow-hidden backdrop-blur-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
+    <div
+      onClick={handleClick}
+      className="w-full block rounded-2xl overflow-hidden backdrop-blur-sm transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
       style={{ background: 'linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(249, 115, 22, 0.1) 100%)', border: '1px solid rgba(251, 191, 36, 0.3)', boxShadow: '0 4px 16px rgba(251, 191, 36, 0.1)' }}
+      role="button"
+      tabIndex={0}
       aria-label={ad.title}>
       <div className="flex items-stretch">
         <div className="w-20 h-20 shrink-0 flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)' }}>
@@ -520,7 +522,6 @@ function AdBanner({ ad }: { ad: AdData }) {
           <div>
             <div className="flex items-center gap-1.5 mb-1">
               <span className="text-[9px] font-bold px-1.5 py-0.5 rounded" style={{ background: 'rgba(251, 191, 36, 0.25)', color: '#fbbf24' }}>تبلیغ</span>
-              {/* FIXED: Show the ad's actual link domain, not hardcoded chabooksaz.ir */}
               <span className="text-[9px] text-slate-400">{(() => { try { return new URL(ad.link_url).hostname } catch { return 'لینک' } })()}</span>
             </div>
             <div className="text-sm font-bold text-white truncate leading-tight">{ad.title}</div>
@@ -531,7 +532,7 @@ function AdBanner({ ad }: { ad: AdData }) {
           </div>
         </div>
       </div>
-    </a>
+    </div>
   )
 }
 
@@ -616,7 +617,7 @@ function WinModal({ level, moves, stars, hasNext, onMenu, onNext }: {
           <div className="flex-1 bg-white/5 rounded-xl p-3 text-center"><div className="text-[10px] text-slate-400 mb-1">حرکت شما</div><div className="text-lg font-black text-amber-400">{moves}</div></div>
           <div className="flex-1 bg-white/5 rounded-xl p-3 text-center"><div className="text-[10px] text-slate-400 mb-1">حداکثر برای ۳ ستاره</div><div className="text-lg font-black text-slate-200">{level.par}</div></div>
         </div>
-        <div className="w-full"><AdBanner ad={ad} /></div>
+        {ad.show_ad && <div className="w-full"><AdBanner ad={ad} /></div>}
         <div className="flex gap-2 w-full mt-2">
           <Button variant="outline" onClick={onMenu} className="flex-1 h-12 rounded-xl border-white/15 bg-white/5 text-white hover:bg-white/10">مراحل</Button>
           {hasNext ? (
