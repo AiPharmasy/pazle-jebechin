@@ -200,7 +200,7 @@ function MenuScreen({ progress, onPlay }: { progress: Progress; onPlay: () => vo
         <div className="flex items-start gap-3 text-white/90"><span className="w-8 h-8 shrink-0 rounded-full bg-rose-500/30 flex items-center justify-center text-base">⚠️</span><span className="leading-relaxed">مراقب باشید — جعبه‌ای که به گوشه می‌رود، گیر می‌کند!</span></div>
       </div>
 
-      {ad.show_ad && <AdBanner ad={ad} />}
+      <AdBanner ad={ad} />
     </div>
   )
 }
@@ -617,7 +617,7 @@ function WinModal({ level, moves, stars, hasNext, onMenu, onNext }: {
           <div className="flex-1 bg-white/5 rounded-xl p-3 text-center"><div className="text-[10px] text-slate-400 mb-1">حرکت شما</div><div className="text-lg font-black text-amber-400">{moves}</div></div>
           <div className="flex-1 bg-white/5 rounded-xl p-3 text-center"><div className="text-[10px] text-slate-400 mb-1">حداکثر برای ۳ ستاره</div><div className="text-lg font-black text-slate-200">{level.par}</div></div>
         </div>
-        {ad.show_ad && <div className="w-full"><AdBanner ad={ad} /></div>}
+        {ad && <div className="w-full"><AdBanner ad={ad} /></div>}
         <div className="flex gap-2 w-full mt-2">
           <Button variant="outline" onClick={onMenu} className="flex-1 h-12 rounded-xl border-white/15 bg-white/5 text-white hover:bg-white/10">مراحل</Button>
           {hasNext ? (
