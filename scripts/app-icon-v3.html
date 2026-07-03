@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>App Icon v3 — پازل جعبه‌چین</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+
+  .icon {
+    width: 512px;
+    height: 512px;
+    position: relative;
+    border-radius: 115px;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 25% 25%, rgba(99, 102, 241, 0.3) 0%, transparent 55%),
+      radial-gradient(circle at 75% 75%, rgba(236, 72, 153, 0.2) 0%, transparent 55%),
+      linear-gradient(145deg, #1e1b4b 0%, #0f172a 50%, #020617 100%);
+    box-shadow:
+      0 0 0 6px rgba(255, 255, 255, 0.04),
+      inset 0 6px 16px rgba(255, 255, 255, 0.1),
+      inset 0 -10px 30px rgba(0, 0, 0, 0.7);
+  }
+
+  /* Visible grid pattern - 12% opacity */
+  .grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    background-size: 32px 32px;
+    opacity: 1;
+  }
+
+  /* Top warm glow */
+  .top-glow {
+    position: absolute;
+    top: -120px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 450px;
+    height: 240px;
+    background: radial-gradient(ellipse, rgba(251, 191, 36, 0.4) 0%, transparent 70%);
+    filter: blur(50px);
+    pointer-events: none;
+  }
+
+  /* ===== HERO COMPOSITION: crate being pushed to goal (left to right) ===== */
+  .stage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 440px;
+    height: 280px;
+    display: flex;
+    flex-direction: row; /* Force LTR even in RTL context */
+    direction: ltr;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 45px;
+  }
+
+  /* ===== PLAYER (far left, smaller, supporting role) ===== */
+  .player-wrap {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+    z-index: 2;
+  }
+
+  .player {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #60a5fa 0%, #3b82f6 50%, #1e3a8a 100%);
+    box-shadow:
+      0 10px 24px rgba(59, 130, 246, 0.6),
+      inset 0 -8px 0 rgba(0, 0, 0, 0.35),
+      inset 0 8px 0 rgba(255, 255, 255, 0.35);
+    position: relative;
+  }
+
+  .player-eyes {
+    position: absolute;
+    top: 32%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 56px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .player-eye {
+    width: 18px;
+    height: 22px;
+    background: white;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .player-eye::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 9px;
+    height: 11px;
+    background: #0f172a;
+    border-radius: 50%;
+  }
+
+  .player-smile {
+    position: absolute;
+    bottom: 22%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 34px;
+    height: 14px;
+    border-bottom: 4px solid rgba(15, 23, 42, 0.8);
+    border-radius: 0 0 30px 30px;
+  }
+
+  /* Motion lines between player and crate */
+  .motion-lines {
+    position: absolute;
+    top: 50%;
+    right: -45px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    pointer-events: none;
+  }
+
+  .motion-line {
+    height: 6px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.7) 0%, transparent 100%);
+    border-radius: 3px;
+  }
+
+  .motion-line-1 { width: 40px; }
+  .motion-line-2 { width: 30px; margin-right: 8px; }
+
+  /* ===== CRATE (center, HERO — largest, most detailed) ===== */
+  .crate {
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(145deg, #fbbf24 0%, #f59e0b 30%, #d97706 60%, #92400e 100%);
+    border-radius: 22px;
+    box-shadow:
+      0 24px 50px rgba(217, 119, 6, 0.55),
+      0 10px 20px rgba(0, 0, 0, 0.5),
+      inset 0 -12px 0 rgba(0, 0, 0, 0.4),
+      inset 0 8px 0 rgba(255, 255, 255, 0.35),
+      inset 10px 0 0 rgba(255, 255, 255, 0.15),
+      inset -10px 0 0 rgba(0, 0, 0, 0.25),
+      /* Dark outline for separation from goal glow */
+      0 0 0 3px rgba(0, 0, 0, 0.3);
+    position: relative;
+    transform: rotate(-5deg);
+    flex-shrink: 0;
+    z-index: 3;
+  }
+
+  /* Wood plank lines */
+  .crate::before {
+    content: '';
+    position: absolute;
+    top: 28%;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 70px 0 rgba(0, 0, 0, 0.4);
+  }
+
+  /* X bracing */
+  .crate-x {
+    position: absolute;
+    inset: 24px;
+    pointer-events: none;
+  }
+
+  .crate-x::before,
+  .crate-x::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 220%;
+    height: 10px;
+    background: rgba(0, 0, 0, 0.45);
+    border-radius: 5px;
+  }
+
+  .crate-x::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  .crate-x::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+
+  /* Crate highlight (top-left light reflection) */
+  .crate-highlight {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    width: 70px;
+    height: 45px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.55) 0%, transparent 80%);
+    border-radius: 14px;
+    pointer-events: none;
+  }
+
+  /* ===== GOAL TARGET (far right, large glowing) ===== */
+  .goal {
+    position: relative;
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(251, 191, 36, 0.3) 0%, rgba(251, 191, 36, 0.08) 50%, transparent 75%);
+    box-shadow:
+      0 0 80px rgba(251, 191, 36, 0.5),
+      0 0 120px rgba(251, 191, 36, 0.25),
+      inset 0 0 50px rgba(251, 191, 36, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    z-index: 1;
+  }
+
+  .goal-ring {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 10px dashed #fbbf24;
+    box-shadow:
+      0 0 24px rgba(251, 191, 36, 0.7),
+      inset 0 0 24px rgba(251, 191, 36, 0.25);
+  }
+
+  .goal-dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #fbbf24;
+    box-shadow: 0 0 40px #fbbf24, 0 0 15px #fde68a, 0 0 5px #ffffff;
+  }
+
+  /* ===== STAR (top-right, larger now) ===== */
+  .star-burst {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 90px;
+    height: 90px;
+    z-index: 10;
+  }
+
+  .star-shape {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #fef3c7 0%, #fbbf24 50%, #f59e0b 100%);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    filter: drop-shadow(0 6px 16px rgba(251, 191, 36, 0.7));
+  }
+
+  /* Star inner shine */
+  .star-shine {
+    position: absolute;
+    top: 20%;
+    left: 25%;
+    width: 25%;
+    height: 25%;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    filter: blur(2px);
+  }
+
+  /* Bottom shadow for depth */
+  .bottom-shadow {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, transparent 100%);
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="icon">
+  <div class="grid-bg"></div>
+  <div class="top-glow"></div>
+
+  <div class="stage">
+    <!-- Player on far left -->
+    <div class="player-wrap">
+      <div class="player">
+        <div class="player-eyes">
+          <div class="player-eye"></div>
+          <div class="player-eye"></div>
+        </div>
+        <div class="player-smile"></div>
+      </div>
+      <div class="motion-lines">
+        <div class="motion-line motion-line-1"></div>
+        <div class="motion-line motion-line-2"></div>
+      </div>
+    </div>
+
+    <!-- Crate (HERO - center) -->
+    <div class="crate">
+      <div class="crate-x"></div>
+      <div class="crate-highlight"></div>
+    </div>
+
+    <!-- Goal target on far right -->
+    <div class="goal">
+      <div class="goal-ring"></div>
+      <div class="goal-dot"></div>
+    </div>
+  </div>
+
+  <!-- Star top-right -->
+  <div class="star-burst">
+    <div class="star-shape"></div>
+    <div class="star-shine"></div>
+  </div>
+
+  <div class="bottom-shadow"></div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>App Icon Foreground — transparent bg</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+
+  /* Just the block stack, no background */
+  .stack {
+    width: 432px;
+    height: 432px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-6deg);
+  }
+
+  .layer {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+  }
+
+  /* Bottom: 3 red */
+  .layer-bottom {
+    bottom: 60px;
+    width: 252px;
+    height: 84px;
+    flex-direction: row;
+    direction: ltr;
+  }
+
+  .block-red {
+    flex: 1;
+    background: linear-gradient(145deg, #ff7a6b 0%, #f44336 45%, #d32f2f 100%);
+    border-radius: 14px;
+    box-shadow:
+      0 10px 20px rgba(211, 47, 47, 0.5),
+      inset 0 -10px 0 rgba(127, 14, 14, 0.4),
+      inset 0 8px 0 rgba(255, 255, 255, 0.4),
+      inset 4px 0 0 rgba(255, 255, 255, 0.15),
+      inset -4px 0 0 rgba(0, 0, 0, 0.15);
+    position: relative;
+  }
+  .block-red::before {
+    content: '';
+    position: absolute;
+    top: 10px; left: 10px;
+    width: 30%; height: 22%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.2) 70%, transparent 100%);
+    border-radius: 6px;
+  }
+
+  /* Middle: blue + green */
+  .layer-middle {
+    bottom: 150px;
+    width: 168px;
+    height: 84px;
+    flex-direction: row;
+    direction: ltr;
+  }
+
+  .block-blue {
+    flex: 1;
+    background: linear-gradient(145deg, #6fc4f5 0%, #2196f3 45%, #1976d2 100%);
+    border-radius: 14px;
+    box-shadow:
+      0 10px 20px rgba(33, 150, 243, 0.5),
+      inset 0 -10px 0 rgba(10, 71, 122, 0.4),
+      inset 0 8px 0 rgba(255, 255, 255, 0.45),
+      inset 4px 0 0 rgba(255, 255, 255, 0.2),
+      inset -4px 0 0 rgba(0, 0, 0, 0.15);
+    position: relative;
+  }
+  .block-blue::before {
+    content: '';
+    position: absolute;
+    top: 10px; left: 10px;
+    width: 30%; height: 22%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.2) 70%, transparent 100%);
+    border-radius: 6px;
+  }
+
+  .block-green {
+    flex: 1;
+    background: linear-gradient(145deg, #6ee090 0%, #2ecc71 45%, #27ae60 100%);
+    border-radius: 14px;
+    box-shadow:
+      0 10px 20px rgba(46, 204, 113, 0.5),
+      inset 0 -10px 0 rgba(17, 95, 36, 0.4),
+      inset 0 8px 0 rgba(255, 255, 255, 0.45),
+      inset 4px 0 0 rgba(255, 255, 255, 0.2),
+      inset -4px 0 0 rgba(0, 0, 0, 0.15);
+    position: relative;
+  }
+  .block-green::before {
+    content: '';
+    position: absolute;
+    top: 10px; left: 10px;
+    width: 30%; height: 22%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.2) 70%, transparent 100%);
+    border-radius: 6px;
+  }
+
+  /* Top: yellow */
+  .layer-top {
+    bottom: 240px;
+    width: 84px;
+    height: 84px;
+  }
+
+  .block-yellow {
+    width: 100%; height: 100%;
+    background: linear-gradient(145deg, #fff4a3 0%, #ffd700 35%, #f1c40f 75%, #d4ac0d 100%);
+    border-radius: 16px;
+    box-shadow:
+      0 16px 32px rgba(241, 196, 15, 0.6),
+      0 8px 16px rgba(0, 0, 0, 0.25),
+      inset 0 -12px 0 rgba(160, 120, 0, 0.4),
+      inset 0 10px 0 rgba(255, 255, 255, 0.6),
+      inset 6px 0 0 rgba(255, 255, 255, 0.25),
+      inset -6px 0 0 rgba(160, 120, 0, 0.2);
+    position: relative;
+  }
+  .block-yellow::before {
+    content: '';
+    position: absolute;
+    top: 12px; left: 12px;
+    width: 32%; height: 28%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.3) 70%, transparent 100%);
+    border-radius: 8px;
+  }
+
+  .sparkle {
+    position: absolute;
+    top: -20px; right: -20px;
+    width: 48px; height: 48px;
+    background: radial-gradient(circle, #ffffff 0%, #ffeb99 30%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(3px);
+  }
+
+  .star-sparkle {
+    position: absolute;
+    top: -25px; right: -25px;
+    width: 36px; height: 36px;
+    background: white;
+    clip-path: polygon(50% 0%, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0% 50%, 40% 40%);
+    filter: drop-shadow(0 2px 4px rgba(255, 215, 0, 0.6));
+  }
+</style>
+</head>
+<body>
+
+<div class="stack">
+  <div class="layer layer-top">
+    <div class="block-yellow">
+      <div class="sparkle"></div>
+      <div class="star-sparkle"></div>
+    </div>
+  </div>
+  <div class="layer layer-middle">
+    <div class="block-blue"></div>
+    <div class="block-green"></div>
+  </div>
+  <div class="layer layer-bottom">
+    <div class="block-red"></div>
+    <div class="block-red"></div>
+    <div class="block-red"></div>
+  </div>
+</div>
+
+</body>
+</html>

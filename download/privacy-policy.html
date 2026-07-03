@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سیاست حریم خصوصی — پازل جعبه‌چین</title>
+<style>
+  @font-face {
+    font-family: 'Vazirmatn';
+    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');
+    font-weight: 400;
+  }
+  @font-face {
+    font-family: 'Vazirmatn';
+    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Bold.woff2') format('woff2');
+    font-weight: 700;
+  }
+  @font-face {
+    font-family: 'Vazirmatn';
+    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Black.woff2') format('woff2');
+    font-weight: 900;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Vazirmatn', 'Tahoma', system-ui, sans-serif;
+    background:
+      radial-gradient(ellipse at top, #1e293b 0%, #0f172a 50%, #020617 100%);
+    color: #e2e8f0;
+    min-height: 100vh;
+    line-height: 1.8;
+    padding: 0;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 24px;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 40px 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+  }
+
+  .logo {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 16px;
+    background: linear-gradient(135deg, #f97316 0%, #dc2626 100%);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    box-shadow: 0 12px 30px rgba(220, 38, 38, 0.4);
+  }
+
+  h1 {
+    font-size: 32px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #fbbf24 0%, #f97316 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    color: #94a3b8;
+    font-size: 15px;
+  }
+
+  .updated {
+    display: inline-block;
+    margin-top: 12px;
+    background: rgba(251, 191, 36, 0.15);
+    color: #fbbf24;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  section {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(10px);
+  }
+
+  h2 {
+    color: #fbbf24;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  h2 .icon {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  p {
+    color: #cbd5e1;
+    margin-bottom: 12px;
+    font-size: 15px;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  strong {
+    color: #f1f5f9;
+    font-weight: 700;
+  }
+
+  code {
+    background: rgba(251, 191, 36, 0.15);
+    color: #fbbf24;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    direction: ltr;
+    display: inline-block;
+  }
+
+  ul {
+    padding-right: 20px;
+    margin: 12px 0;
+  }
+
+  li {
+    color: #cbd5e1;
+    margin-bottom: 8px;
+    font-size: 15px;
+  }
+
+  .highlight-box {
+    background: rgba(16, 185, 129, 0.1);
+    border-right: 4px solid #10b981;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+
+  .highlight-box strong {
+    color: #10b981;
+  }
+
+  .warn-box {
+    background: rgba(239, 68, 68, 0.1);
+    border-right: 4px solid #ef4444;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+
+  .warn-box strong {
+    color: #ef4444;
+  }
+
+  .info-box {
+    background: rgba(59, 130, 246, 0.1);
+    border-right: 4px solid #3b82f6;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+
+  .info-box strong {
+    color: #3b82f6;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  th, td {
+    padding: 12px 16px;
+    text-align: right;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 14px;
+  }
+
+  th {
+    background: rgba(251, 191, 36, 0.1);
+    color: #fbbf24;
+    font-weight: 700;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  .contact {
+    text-align: center;
+    margin-top: 40px;
+    padding: 24px;
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, rgba(220, 38, 38, 0.1) 100%);
+    border: 1px solid rgba(251, 191, 36, 0.2);
+    border-radius: 16px;
+  }
+
+  .contact a {
+    color: #fbbf24;
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  .contact a:hover {
+    text-decoration: underline;
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    color: #64748b;
+    font-size: 13px;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 640px) {
+    .container {
+      padding: 20px 16px;
+    }
+
+    h1 {
+      font-size: 24px;
+    }
+
+    h2 {
+      font-size: 18px;
+    }
+
+    section {
+      padding: 20px 18px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header>
+    <div class="logo">📦</div>
+    <h1>سیاست حریم خصوصی</h1>
+    <p class="subtitle">پازل جعبه‌چین — بازی فکری اندروید</p>
+    <div class="updated">آخرین به‌روزرسانی: ۱ جولای ۲۰۲۶</div>
+  </header>
+
+  <section>
+    <h2><span class="icon">📋</span> مقدمه</h2>
+    <p>
+      این سند سیاست حریم خصوصی برنامه «پازل جعبه‌چین» (در ادامه «برنامه» یا «بازی») است که توسط
+      <strong>استودیو چابک‌ساز</strong> (وب‌سایت: <code>chabooksaz.ir</code> — شعار: «ایده از شما، ساخت از ما»)
+      توسعه داده شده است. ما به حریم خصوصی کاربران خود احترام می‌گذاریم
+      و متعهد به حفاظت از اطلاعات شخصی شما هستیم.
+    </p>
+    <p>
+      با نصب و استفاده از این برنامه، شما با سیاست‌های شرح‌داده‌شده در این سند موافقت می‌کنید.
+      این سیاست بر اساس قوانین جمهوری اسلامی ایران و راهنماهای مارکت‌های ایرانی (بازار، مایکت، ایران‌اپس) تدوین شده است.
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="icon">🔒</span> اطلاعات جمع‌آوری‌شده</h2>
+
+    <div class="highlight-box">
+      <strong>✅ این برنامه هیچ اطلاعات شخصی کاربر را جمع‌آوری، ذخیره یا انتقال نمی‌دهد.</strong>
+    </div>
+
+    <p>به‌طور خاص:</p>
+    <ul>
+      <li><strong>نام، ایمیل، شماره تلفن</strong> — جمع‌آوری نمی‌شود</li>
+      <li><strong>موقعیت مکانی (GPS)</strong> — جمع‌آوری نمی‌شود</li>
+      <li><strong>لیست مخاطبین</strong> — دسترسی ندارد</li>
+      <li><strong>عکس‌ها و فایل‌های شخصی</strong> — دسترسی ندارد</li>
+      <li><strong>اطلاعات دستگاه (IMEI، مدل، نسخه Android)</strong> — جمع‌آوری نمی‌شود</li>
+      <li><strong>تاریخچه مرور</strong> — دسترسی ندارد</li>
+      <li><strong>دوربین و میکروفون</strong> — دسترسی ندارد</li>
+    </ul>
+
+    <div class="info-box">
+      <strong>📊 اطلاعات ذخیره‌شده روی دستگاه:</strong>
+      فقط <strong>پیشرفت بازی</strong> (کدام مراحل را کامل کرده‌اید و بهترین تعداد حرکات شما)
+      روی دستگاه خود شما در <code>localStorage</code> مرورگر داخلی برنامه ذخیره می‌شود.
+      این اطلاعات <strong>هرگز</strong> از دستگاه شما خارج نمی‌شود و اگر برنامه را حذف کنید، پاک می‌شود.
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="icon">📡</span> دسترسی‌های برنامه</h2>
+    <p>این برنامه فقط دو دسترسی محدود دارد:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>دسترسی</th>
+          <th>هدف</th>
+          <th>الزامی؟</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>INTERNET</code></td>
+          <td>دریافت بنر تبلیغاتی از <code>chabooksaz.ir</code></td>
+          <td>خیر — بازی بدون اینترنت هم کار می‌کند</td>
+        </tr>
+        <tr>
+          <td><code>ACCESS_NETWORK_STATE</code></td>
+          <td>بررسی وضعیت اتصال اینترنت (برای تبلیغ)</td>
+          <td>خیر</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="warn-box">
+      <strong>⚠️ نکته مهم:</strong>
+      این برنامه دسترسی به دوربین، میکروفون، مخاطبین، پیامک‌ها، فایل‌ها، موقعیت مکانی یا هر داده شخصی دیگری را <strong>درخواست نمی‌کند</strong>.
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="icon">📢</span> تبلیغات</h2>
+    <p>
+      این برنامه ممکن است یک بنر تبلیغاتی کوچک در منوی اصلی و صفحه پیروزی نمایش دهد.
+      این تبلیغات از سرور <strong>chabooksaz.ir</strong> دریافت می‌شوند.
+    </p>
+
+    <h3 style="color: #cbd5e1; margin-top: 20px; margin-bottom: 12px;">اطلاعاتی که برای تبلیغات ارسال نمی‌شود:</h3>
+    <ul>
+      <li>هیچ داده شخصی برای هدف‌گذاری تبلیغات ارسال نمی‌شود</li>
+      <li>هیچ شناسه دستگاه (Device ID، Advertising ID) ارسال نمی‌شود</li>
+      <li>هیچ اطلاعات مربوط به رفتار کاربر جمع‌آوری نمی‌شود</li>
+      <li>پیشرفت بازی شما برای تبلیغات استفاده نمی‌شود</li>
+    </ul>
+
+    <h3 style="color: #cbd5e1; margin-top: 20px; margin-bottom: 12px;">نحوه کار تبلیغ:</h3>
+    <ul>
+      <li>برنامه یک درخواست ساده HTTP GET به <code>chabooksaz.ir/api/ads/random</code> می‌فرستد</li>
+      <li>سرور یک آگهی تصادفی برمی‌گرداند (عنوان، توضیح، تصویر، لینک)</li>
+      <li>اگر اینترنت قطع باشد یا سرور در دسترس نباشد، یک تبلیغ پیش‌فرض (معرفی خود chabooksaz.ir) نمایش داده می‌شود</li>
+      <li>نتیجه برای ۵ دقیقه روی دستگاه کش می‌شود تا تعداد درخواست‌ها کاهش یابد</li>
+      <li>اگر روی تبلیغ کلیک کنید، مرورگر دستگاه شما باز می‌شود و به لینک مقصد می‌رود</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="icon">👶</span> کودکان</h2>
+    <p>
+      این بازی برای همه سنین مناسب است و محتوای کودکان را جمع‌آوری نمی‌کند.
+      مطابق با قوانین جمهوری اسلامی ایران و راهنماهای مارکت‌های ایرانی، این برنامه برای رده سنی
+      <strong>۳ سال به بالا</strong> مناسب است.
+    </p>
+    <p>
+      ما آگاهانه اطلاعات شخصی کودکان زیر ۱۳ سال را جمع‌آوری نمی‌کنیم. اگر فکر می‌کنید فرزند شما
+      اطلاعاتی به ما داده است، لطفاً با ما تماس بگیرید تا آن را حذف کنیم (هرچند طبق سیاست بالا،
+      ما اساساً هیچ اطلاعات شخصی جمع‌آوری نمی‌کنیم).
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="icon">🔗</span> لینک‌های خارجی</h2>
+    <p>
+      این برنامه ممکن است شامل لینک‌هایی به سایت‌های خارجی باشد (به‌ویژه لینک‌های تبلیغاتی به <code>chabooksaz.ir</code>).
+      ما کنترل محتوای این سایت‌ها را نداریم و سیاست حریم خصوصی آن‌ها ممکن است با ما متفاوت باشد.
+      توصیه می‌کنیم سیاست حریم خصوصی هر سایت خارجی را قبل از استفاده مطالعه کنید.
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="icon">🛡️</span> امنیت داده</h2>
+    <p>
+      از آنجایی که این برنامه هیچ داده شخصی را جمع‌آوری یا انتقال نمی‌دهد، خطر نشت اطلاعات وجود ندارد.
+      پیشرفت بازی فقط روی دستگاه شما ذخیره می‌شود و هرگز از دستگاه خارج نمی‌شود.
+      تنها ارتباط اینترنت برنامه برای دریافت تبلیغ است که شامل هیچ داده شخصی نیست.
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="icon">📊</span> تحلیل و آمار</h2>
+    <p>
+      این برنامه از <strong>هیچ ابزار تحلیلی (Analytics)</strong> استفاده نمی‌کند.
+      ما نمی‌دانیم چند نفر بازی را نصب کرده‌اند، چقدر با آن بازی کرده‌اند، یا کدام مراحل را حل کرده‌اند.
+      آمار نصب فقط توسط خود مارکت (بازار/مایکت) نگهداری می‌شود و در اختیار ما قرار نمی‌گیرد.
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="icon">🔄</span> تغییرات این سیاست</h2>
+    <p>
+      ممکن است این سیاست حریم خصوصی را به‌روزرسانی کنیم. هر تغییری در این صفحه منتشر خواهد شد و
+      تاریخ «آخرین به‌روزرسانی» در بالای صفحه به‌روز می‌شود. توصیه می‌کنیم این صفحه را به‌طور دوره‌ای
+      بررسی کنید تا از تغییرات مطلع شوید.
+    </p>
+    <p>
+      در صورت تغییرات اساسی، از طریق توضیحات به‌روزرسانی برنامه در مارکت، کاربران را مطلع خواهیم کرد.
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="icon">✅</span> حقوق کاربر</h2>
+    <p>شما این حقوق را دارید:</p>
+    <ul>
+      <li><strong>حق دسترسی:</strong> می‌توانید ببینید چه اطلاعاتی از شما ذخیره شده (هیچ اطلاعاتی ذخیره نمی‌شود)</li>
+      <li><strong>حق حذف:</strong> با حذف برنامه، تمام داده‌های ذخیره‌شده روی دستگاه شما پاک می‌شود</li>
+      <li><strong>حق قطع اینترنت:</strong> می‌توانید اینترنت دستگاه را قطع کنید — بازی همچنان کار می‌کند، فقط تبلیغ نمایش داده نمی‌شود</li>
+      <li><strong>حق عدم رضایت:</strong> می‌توانید برنامه را حذف کنید اگر با این سیاست موافق نیستید</li>
+    </ul>
+  </section>
+
+  <div class="contact">
+    <h2 style="justify-content: center; display: flex; align-items: center; gap: 10px;">
+      <span class="icon">✉️</span> تماس با ما
+    </h2>
+    <p>اگر در مورد این سیاست حریم خصوصی سوال دارید، با ما تماس بگیرید:</p>
+    <p style="margin-top: 16px; font-size: 17px;">
+      📞 تلفن: <a href="tel:09154889167">09154889167</a>
+    </p>
+    <p style="margin-top: 8px; font-size: 17px;">
+      🌐 وب‌سایت: <a href="https://chabooksaz.ir">chabooksaz.ir</a>
+    </p>
+    <p style="margin-top: 8px; font-size: 14px; color: #94a3b8;">
+      استودیو چابک‌ساز — ایده از شما، ساخت از ما
+    </p>
+  </div>
+
+  <footer>
+    <p>© ۲۰۲۶ استودیو چابک‌ساز — تمام حقوق محفوظ است.</p>
+    <p style="margin-top: 8px;">ایده از شما، ساخت از ما — chabooksaz.ir</p>
+  </footer>
+
+</div>
+
+</body>
+</html>

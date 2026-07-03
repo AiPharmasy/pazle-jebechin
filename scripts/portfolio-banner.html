@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>بنر نمونه‌کار — پازل جعبه‌چین</title>
+<style>
+  @font-face {
+    font-family: 'Vazirmatn';
+    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Black.woff2') format('woff2');
+    font-weight: 900;
+  }
+  @font-face {
+    font-family: 'Vazirmatn';
+    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Bold.woff2') format('woff2');
+    font-weight: 700;
+  }
+  @font-face {
+    font-family: 'Vazirmatn';
+    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');
+    font-weight: 400;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'Vazirmatn', 'Tahoma', system-ui, sans-serif;
+  }
+
+  .banner {
+    width: 1200px;
+    height: 630px;
+    position: relative;
+    background:
+      radial-gradient(ellipse at top right, rgba(251, 191, 36, 0.18) 0%, transparent 50%),
+      radial-gradient(ellipse at bottom left, rgba(168, 85, 247, 0.18) 0%, transparent 50%),
+      linear-gradient(135deg, #1e293b 0%, #0f172a 50%, #020617 100%);
+    overflow: hidden;
+    direction: rtl;
+  }
+
+  /* Background dots */
+  .bg-dots {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  /* Top label - portfolio badge */
+  .portfolio-badge {
+    position: absolute;
+    top: 32px;
+    right: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(251, 191, 36, 0.15);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    color: #fbbf24;
+    padding: 8px 18px;
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 700;
+    backdrop-filter: blur(8px);
+  }
+
+  .portfolio-badge::before {
+    content: '★';
+    color: #fbbf24;
+  }
+
+  /* Right side: game scene mockup */
+  .phone-mockup {
+    position: absolute;
+    top: 50%;
+    right: 60px;
+    transform: translateY(-50%);
+    width: 320px;
+    height: 540px;
+    background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+    border: 4px solid #334155;
+    border-radius: 36px;
+    padding: 16px 12px;
+    box-shadow:
+      0 30px 80px rgba(0,0,0,0.6),
+      0 0 0 1px rgba(255,255,255,0.05),
+      inset 0 2px 8px rgba(0,0,0,0.4);
+  }
+
+  /* Phone notch */
+  .phone-mockup::before {
+    content: '';
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 18px;
+    background: #020617;
+    border-radius: 12px;
+  }
+
+  /* Phone screen content */
+  .phone-screen {
+    margin-top: 28px;
+    height: calc(100% - 28px);
+    border-radius: 24px;
+    background: radial-gradient(ellipse at top, #1a1f2e 0%, #0f1419 100%);
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: hidden;
+  }
+
+  .phone-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: #94a3b8;
+  }
+
+  .phone-title {
+    color: #fbbf24;
+    font-weight: 700;
+    font-size: 13px;
+  }
+
+  .phone-moves {
+    background: rgba(255,255,255,0.05);
+    padding: 4px 8px;
+    border-radius: 6px;
+    color: #fbbf24;
+    font-weight: 700;
+  }
+
+  /* Mini game grid */
+  .mini-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    gap: 2px;
+    background: rgba(0,0,0,0.3);
+    padding: 6px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .mc { border-radius: 3px; }
+  .mc-wall {
+    background: linear-gradient(145deg, #334155 0%, #0f172a 100%);
+    border: 1px solid #020617;
+    box-shadow: inset 0 -2px 0 rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.12);
+  }
+  .mc-floor { background: rgba(71, 85, 105, 0.2); }
+  .mc-floor-l { background: rgba(71, 85, 105, 0.35); }
+  .mc-goal {
+    background: rgba(71, 85, 105, 0.2);
+    position: relative;
+  }
+  .mc-goal::after {
+    content: '';
+    position: absolute;
+    inset: 25%;
+    border-radius: 50%;
+    border: 2px dashed #fbbf24;
+    background: radial-gradient(circle, rgba(251, 191, 36, 0.3) 0%, transparent 70%);
+  }
+  .mc-crate {
+    background: linear-gradient(135deg, #d97706 0%, #92400e 100%);
+    border-radius: 4px;
+    box-shadow: inset 0 -2px 0 rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+  .mc-crate-done {
+    background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+  }
+  .mc-player {
+    background: linear-gradient(135deg, #60a5fa 0%, #1e40af 100%);
+    border-radius: 50%;
+    box-shadow: inset 0 -2px 0 rgba(0,0,0,0.3), inset 0 2px 0 rgba(255,255,255,0.3);
+  }
+
+  /* D-pad mockup */
+  .dpad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    width: 100px;
+    margin: 0 auto;
+  }
+  .dpad-btn {
+    aspect-ratio: 1;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+  }
+  .dpad-empty { background: transparent; border: none; }
+
+  /* Left side: text content */
+  .text-side {
+    position: absolute;
+    top: 50%;
+    left: 60px;
+    transform: translateY(-50%);
+    width: 720px;
+    color: white;
+  }
+
+  .studio-name {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .studio-logo {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #f97316 0%, #dc2626 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    font-weight: 900;
+    box-shadow: 0 8px 20px rgba(220, 38, 38, 0.4);
+  }
+
+  .studio-text {
+    color: #94a3b8;
+    font-size: 16px;
+  }
+
+  .studio-text strong {
+    color: #fbbf24;
+    font-weight: 700;
+  }
+
+  .category-tag {
+    display: inline-block;
+    background: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: #60a5fa;
+    padding: 6px 16px;
+    border-radius: 16px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .title {
+    font-size: 76px;
+    font-weight: 900;
+    line-height: 1.05;
+    margin-bottom: 18px;
+    letter-spacing: -2px;
+  }
+
+  .title-accent {
+    background: linear-gradient(135deg, #fbbf24 0%, #f97316 50%, #dc2626 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .subtitle {
+    font-size: 22px;
+    color: #cbd5e1;
+    line-height: 1.5;
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+
+  .features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .feature-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #e2e8f0;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .feature-tag .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .dot-orange { background: #f97316; }
+  .dot-yellow { background: #fbbf24; }
+  .dot-green { background: #10b981; }
+  .dot-blue { background: #3b82f6; }
+  .dot-purple { background: #a855f7; }
+
+  .tech-stack {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    color: #64748b;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .tech-stack strong {
+    color: #94a3b8;
+  }
+
+  /* Bottom URL */
+  .url-bar {
+    position: absolute;
+    bottom: 32px;
+    left: 60px;
+    right: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .url-text {
+    color: #64748b;
+    font-size: 14px;
+    font-family: 'Courier New', monospace;
+    direction: ltr;
+  }
+
+  .url-text strong {
+    color: #fbbf24;
+  }
+
+  .slogan {
+    color: #fbbf24;
+    font-size: 14px;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+
+<div class="banner">
+  <div class="bg-dots"></div>
+
+  <!-- Top right: portfolio badge -->
+  <div class="portfolio-badge">نمونه‌کار استودیو چابک‌ساز</div>
+
+  <!-- Left: text -->
+  <div class="text-side">
+    <div class="studio-name">
+      <div class="studio-logo">چ</div>
+      <div class="studio-text">
+        استودیو <strong>چابک‌ساز</strong> — chabooksaz.ir
+      </div>
+    </div>
+
+    <div class="category-tag">📱 اپلیکیشن موبایل اندروید</div>
+
+    <h1 class="title">
+      <span class="title-accent">پازل جعبه‌چین</span>
+    </h1>
+    <p class="subtitle">
+      بازی فکری سبک سُوکوبان با ۱۷ مرحله چالش‌برانگیز،<br>
+      افکت صوتی کامل، سیستم ستاره و کنترل لمسی.
+    </p>
+
+    <div class="features">
+      <span class="feature-tag"><span class="dot dot-orange"></span>Next.js 16</span>
+      <span class="feature-tag"><span class="dot dot-yellow"></span>Capacitor 8</span>
+      <span class="feature-tag"><span class="dot dot-green"></span>TypeScript</span>
+      <span class="feature-tag"><span class="dot dot-blue"></span>Web Audio API</span>
+      <span class="feature-tag"><span class="dot dot-purple"></span>17 مرحله</span>
+    </div>
+
+    <div class="tech-stack">
+      <strong>تکنولوژی:</strong>
+      Next.js · React · TypeScript · Tailwind CSS · Capacitor · Android SDK
+    </div>
+  </div>
+
+  <!-- Right: phone mockup -->
+  <div class="phone-mockup">
+    <div class="phone-screen">
+      <div class="phone-header">
+        <span class="phone-title">مرحله ۳ — آغاز</span>
+        <span class="phone-moves">۳۳/۳۵</span>
+      </div>
+
+      <div class="mini-grid">
+        <!-- Row 0 -->
+        <div class="mc mc-wall"></div>
+        <div class="mc mc-wall"></div>
+        <div class="mc mc-wall"></div>
+        <div class="mc mc-wall"></div>
+        <div class="mc mc-empty"></div>
+        <div class="mc mc-empty"></div>
+        <div class="mc mc-empty"></div>
+        <!-- Row 1 -->
+        <div class="mc mc-wall"></div>
+        <div class="mc mc-floor"></div>
+        <div class="mc mc-goal"></div>
+        <div class="mc mc-wall"></div>
+        <div class="mc mc-empty"></div>
+        <div class="mc mc-empty"></div>
+        <div class="mc mc-empty"></div>
+        <!-- Row 2 -->
+        <div class="mc mc-wall"></div>
+        <div class="mc mc-floor-l"></div>
+        <div class="mc mc-floor"></div>
+        <div class="mc mc-wall"></div>
+        <div class="mc mc-wall"></div>
+        <div class="mc mc-wall"></div>
+        <div class="mc mc-empty"></div>
+        <!-- Row 3 -->
+        <div class="mc mc-wall"></div>
+        <div class="mc mc-crate-done"></div>
+        <div class="mc mc-player"></div>
+        <div class="mc mc-floor"></div>
+        <div class="mc mc-floor-l"></div>
+        <div class="mc mc-wall"></div>
+        <div class="mc mc-empty"></div>
+        <!-- Row 4 -->
+        <div class="mc mc-wall"></div>
+        <div class="mc mc-floor-l"></div>
+        <div class="mc mc-floor"></div>
+        <div class="mc mc-crate"></div>
+        <div class="mc mc-floor"></div>
+        <div class="mc mc-wall"></div>
+        <div class="mc mc-empty"></div>
+        <!-- Row 5 -->
+        <div class="mc mc-wall"></div>
+        <div class="mc mc-floor"></div>
+        <div class="mc mc-floor-l"></div>
+        <div class="mc mc-wall"></div>
+        <div class="mc mc-wall"></div>
+        <div class="mc mc-wall"></div>
+        <div class="mc mc-empty"></div>
+        <!-- Row 6 -->
+        <div class="mc mc-wall"></div>
+        <div class="mc mc-wall"></div>
+        <div class="mc mc-wall"></div>
+        <div class="mc mc-wall"></div>
+        <div class="mc mc-empty"></div>
+        <div class="mc mc-empty"></div>
+        <div class="mc mc-empty"></div>
+      </div>
+
+      <div class="dpad">
+        <div class="dpad-empty"></div>
+        <div class="dpad-btn"></div>
+        <div class="dpad-empty"></div>
+        <div class="dpad-btn"></div>
+        <div class="dpad-btn"></div>
+        <div class="dpad-btn"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom URL bar -->
+  <div class="url-bar">
+    <div class="url-text">
+      <strong>chabooksaz.ir</strong>/portfolio/pazle-jebechin
+    </div>
+    <div class="slogan">ایده از شما، ساخت از ما</div>
+  </div>
+</div>
+
+</body>
+</html>

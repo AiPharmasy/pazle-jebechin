@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>Feature Graphic — پازل جعبه‌چین</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'Vazirmatn', 'Tahoma', system-ui, sans-serif;
+  }
+
+  .feature {
+    width: 1024px;
+    height: 500px;
+    position: relative;
+    background:
+      radial-gradient(ellipse at top right, rgba(251, 191, 36, 0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at bottom left, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
+      linear-gradient(135deg, #1e293b 0%, #0f172a 50%, #020617 100%);
+    overflow: hidden;
+    direction: rtl;
+  }
+
+  /* Background pattern - subtle dots */
+  .bg-dots {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+  }
+
+  /* Right side: game scene mockup */
+  .scene {
+    position: absolute;
+    top: 50%;
+    right: 40px;
+    transform: translateY(-50%);
+    width: 360px;
+    height: 360px;
+    background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow:
+      0 20px 60px rgba(0,0,0,0.5),
+      inset 0 2px 8px rgba(0,0,0,0.4);
+  }
+
+  /* Mini game grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 4px;
+    width: 100%;
+    height: 100%;
+  }
+
+  .cell {
+    border-radius: 6px;
+    position: relative;
+  }
+
+  .floor {
+    background: rgba(71, 85, 105, 0.2);
+  }
+
+  .floor-light {
+    background: rgba(71, 85, 105, 0.4);
+  }
+
+  .wall {
+    background: linear-gradient(145deg, #334155 0%, #0f172a 100%);
+    border: 1px solid #020617;
+    box-shadow:
+      inset 0 -2px 0 rgba(0,0,0,0.5),
+      inset 0 2px 0 rgba(255,255,255,0.12);
+  }
+
+  .goal {
+    background: rgba(71, 85, 105, 0.2);
+  }
+
+  .goal::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 60%;
+    border-radius: 50%;
+    border: 2px dashed rgba(251, 191, 36, 0.8);
+    background: radial-gradient(circle, rgba(251, 191, 36, 0.25) 0%, transparent 70%);
+  }
+
+  .crate {
+    background: linear-gradient(135deg, #d97706 0%, #92400e 100%);
+    border-radius: 6px;
+    box-shadow:
+      0 3px 8px rgba(217, 119, 6, 0.4),
+      inset 0 -2px 0 rgba(0,0,0,0.3),
+      inset 0 2px 0 rgba(255,255,255,0.2);
+    position: relative;
+  }
+
+  .crate::before {
+    content: '';
+    position: absolute;
+    top: 30%;
+    left: 0;
+    right: 0;
+    height: 8%;
+    background: rgba(0,0,0,0.3);
+  }
+
+  .crate::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0,0,0,0.4), transparent);
+    transform: translateX(-50%) rotate(20deg);
+  }
+
+  .crate-on-goal {
+    background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+    box-shadow:
+      0 3px 8px rgba(16, 185, 129, 0.5),
+      inset 0 -2px 0 rgba(0,0,0,0.3),
+      inset 0 2px 0 rgba(255,255,255,0.2);
+  }
+
+  .player {
+    background: linear-gradient(135deg, #60a5fa 0%, #1e40af 100%);
+    border-radius: 50%;
+    box-shadow:
+      0 3px 8px rgba(59, 130, 246, 0.5),
+      inset 0 -3px 0 rgba(0,0,0,0.3),
+      inset 0 3px 0 rgba(255,255,255,0.3);
+    position: relative;
+  }
+
+  .player::before, .player::after {
+    content: '';
+    position: absolute;
+    top: 35%;
+    width: 12%;
+    height: 14%;
+    background: white;
+    border-radius: 50%;
+  }
+
+  .player::before { left: 30%; }
+  .player::after { right: 30%; }
+
+  /* Left side: text content */
+  .text-side {
+    position: absolute;
+    top: 50%;
+    left: 60px;
+    transform: translateY(-50%);
+    width: 540px;
+    color: white;
+  }
+
+  .badge-top {
+    display: inline-block;
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+  }
+
+  .title {
+    font-size: 64px;
+    font-weight: 900;
+    line-height: 1.05;
+    margin-bottom: 14px;
+    letter-spacing: -1px;
+  }
+
+  .title-accent {
+    background: linear-gradient(135deg, #fbbf24 0%, #f97316 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .subtitle {
+    font-size: 22px;
+    color: #cbd5e1;
+    line-height: 1.5;
+    margin-bottom: 28px;
+    font-weight: 500;
+  }
+
+  .features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .feature-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #e2e8f0;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: 600;
+    backdrop-filter: blur(8px);
+  }
+
+  .feature-tag .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .dot-orange { background: #f97316; }
+  .dot-yellow { background: #fbbf24; }
+  .dot-green { background: #10b981; }
+  .dot-blue { background: #3b82f6; }
+  .dot-purple { background: #a855f7; }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #f97316 0%, #dc2626 100%);
+    color: white;
+    padding: 14px 28px;
+    border-radius: 16px;
+    font-size: 20px;
+    font-weight: 800;
+    box-shadow: 0 8px 24px rgba(220, 38, 38, 0.4);
+  }
+
+  .cta-arrow {
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  .stats {
+    position: absolute;
+    bottom: 24px;
+    right: 40px;
+    display: flex;
+    gap: 20px;
+    color: #94a3b8;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .stats-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* Floating decorative elements */
+  .star {
+    position: absolute;
+    color: #fbbf24;
+    font-size: 20px;
+    opacity: 0.6;
+  }
+
+  .star-1 { top: 60px; left: 480px; transform: rotate(-15deg); }
+  .star-2 { top: 30px; left: 540px; transform: rotate(20deg); font-size: 14px; }
+  .star-3 { bottom: 80px; left: 460px; transform: rotate(-10deg); font-size: 16px; }
+</style>
+</head>
+<body>
+
+<div class="feature">
+  <div class="bg-dots"></div>
+
+  <!-- Decorative stars -->
+  <span class="star star-1">★</span>
+  <span class="star star-2">★</span>
+  <span class="star star-3">★</span>
+
+  <!-- Left: text -->
+  <div class="text-side">
+    <div class="badge-top">🎮 بازی فکری جدید</div>
+    <h1 class="title">
+      <span class="title-accent">پازل جعبه‌چین</span>
+    </h1>
+    <p class="subtitle">
+      جعبه‌ها را به سمت نقاط طلایی هل بده!<br>
+      ۱۷ مرحله چالش‌برانگیز منتظر توست.
+    </p>
+
+    <div class="features">
+      <span class="feature-tag"><span class="dot dot-orange"></span>۱۷ مرحله</span>
+      <span class="feature-tag"><span class="dot dot-yellow"></span>سیستم ستاره</span>
+      <span class="feature-tag"><span class="dot dot-green"></span>کاملاً آفلاین</span>
+      <span class="feature-tag"><span class="dot dot-blue"></span>افکت صوتی</span>
+      <span class="feature-tag"><span class="dot dot-purple"></span>رایگان</span>
+    </div>
+
+    <div class="cta">
+      همین حالا بازی کن!
+      <span class="cta-arrow">←</span>
+    </div>
+  </div>
+
+  <!-- Right: game scene -->
+  <div class="scene">
+    <div class="grid">
+      <!-- Row 1 -->
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <!-- Row 2 -->
+      <div class="cell wall"></div>
+      <div class="cell floor"></div>
+      <div class="cell floor-light"></div>
+      <div class="cell goal"></div>
+      <div class="cell wall"></div>
+      <!-- Row 3 -->
+      <div class="cell wall"></div>
+      <div class="cell floor-light"></div>
+      <div class="cell crate"></div>
+      <div class="cell floor"></div>
+      <div class="cell wall"></div>
+      <!-- Row 4 -->
+      <div class="cell wall"></div>
+      <div class="cell floor"></div>
+      <div class="cell player"></div>
+      <div class="cell floor-light"></div>
+      <div class="cell wall"></div>
+      <!-- Row 5 -->
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+      <div class="cell wall"></div>
+    </div>
+  </div>
+
+  <!-- Bottom stats -->
+  <div class="stats">
+    <div class="stats-item">📦 ۱۷ مرحله</div>
+    <div class="stats-item">⭐ ۳ ستاره</div>
+    <div class="stats-item">🔇 آفلاین</div>
+  </div>
+</div>
+
+</body>
+</html>
