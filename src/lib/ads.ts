@@ -3,9 +3,13 @@
 // API: GET https://chabooksaz.ir/api/ads/random
 // Response: { "title", "description", "image_url", "link_url", "cta_text" }
 //
-// Ad banner is shown ONLY in the main menu (not in win modal).
+// Ad banner is shown in BOTH the main menu AND the win modal.
 // Clicking the banner opens the link — but ONLY on manual user click.
-// NO caching — fresh ad fetched every time the menu loads.
+// NO caching — fresh ad fetched every time.
+//
+// CORS NOTE: If the API doesn't send CORS headers, the browser will
+// block the response. In that case we fall back to the built-in ad.
+// The site admin must add: Access-Control-Allow-Origin: *
 
 export interface AdData {
   title: string
