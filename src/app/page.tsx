@@ -586,12 +586,10 @@ function DPadButton({ children, onPress, dir }: { children: React.ReactNode; onP
   )
 }
 
-/* ============== WIN MODAL ============== */
+/* ============== WIN MODAL (NO AD — prevents auto-open) ============== */
 function WinModal({ level, moves, stars, hasNext, onMenu, onNext }: {
   level: (typeof LEVELS)[number]; moves: number; stars: 0 | 1 | 2 | 3; hasNext: boolean; onMenu: () => void; onNext: () => void
 }) {
-  const [ad, setAd] = useState<AdData>(getFallbackAd())
-  useEffect(() => { let mounted = true; fetchAd().then((fetched) => { if (mounted) setAd(fetched) }); return () => { mounted = false } }, [])
   const colors = ['#ef4444', '#f59e0b', '#10b981', '#3b82f6', '#a855f7', '#ec4899']
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(0, 0, 0, 0.8)', backdropFilter: 'blur(6px)' }}>
@@ -617,7 +615,6 @@ function WinModal({ level, moves, stars, hasNext, onMenu, onNext }: {
           <div className="flex-1 bg-white/5 rounded-xl p-3 text-center"><div className="text-[10px] text-slate-400 mb-1">حرکت شما</div><div className="text-lg font-black text-amber-400">{moves}</div></div>
           <div className="flex-1 bg-white/5 rounded-xl p-3 text-center"><div className="text-[10px] text-slate-400 mb-1">حداکثر برای ۳ ستاره</div><div className="text-lg font-black text-slate-200">{level.par}</div></div>
         </div>
-        {ad && <div className="w-full"><AdBanner ad={ad} /></div>}
         <div className="flex gap-2 w-full mt-2">
           <Button variant="outline" onClick={onMenu} className="flex-1 h-12 rounded-xl border-white/15 bg-white/5 text-white hover:bg-white/10">مراحل</Button>
           {hasNext ? (
