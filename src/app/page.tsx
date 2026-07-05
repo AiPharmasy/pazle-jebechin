@@ -494,12 +494,19 @@ function GameScreen({ levelIndex, onMenu, onNext, onWin, totalLevels }: {
   )
 }
 
-/* ============== AD BANNER (uses div, not <a>, to prevent auto-open) ============== */
+/* ============== AD BANNER (safe click — no window.open in render) ============== */
 function AdBanner({ ad }: { ad: AdData }) {
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    e.preventDefault()
     getSound().click()
+    // Use location.href instead of window.open — safer in WebView, no auto-trigger
     if (typeof window !== 'undefined') {
-      window.open(ad.link_url, '_blank', 'noopener,noreferrer')
+      try {
+        window.location.href = ad.link_url
+      } catch {
+        /* ignore */
+      }
     }
   }
   return (
