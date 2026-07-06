@@ -28,6 +28,12 @@ jobs:
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          accept-android-sdk-licenses: true
+
+      - name: Install Android packages
+        run: |
+          yes | sdkmanager "platforms;android-34" "build-tools;34.0.0" || true
 
       - name: Install dependencies
         run: npm install --legacy-peer-deps
