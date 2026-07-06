@@ -19,7 +19,13 @@ android {
 
     signingConfigs {
         release {
-            storeFile file('../../download/chabooksaz-release-keystore.jks')
+            // In CI: keystore is at app/chabooksaz-release-keystore.jks
+            // In local dev: keystore is at ../../download/chabooksaz-release-keystore.jks
+            def ksFile = file('chabooksaz-release-keystore.jks')
+            if (!ksFile.exists()) {
+                ksFile = file('../../download/chabooksaz-release-keystore.jks')
+            }
+            storeFile ksFile
             storePassword 'Chabooksaz@2026!Sokoban'
             keyAlias 'chabooksaz-key'
             keyPassword 'Chabooksaz@2026!Sokoban'
