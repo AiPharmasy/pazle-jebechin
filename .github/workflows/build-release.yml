@@ -39,7 +39,11 @@ jobs:
         run: npx next build
 
       - name: Sync Capacitor
-        run: npx cap sync android
+        run: |
+          npx cap copy android || true
+          mkdir -p android/app/src/main/assets/public
+          cp -r out/* android/app/src/main/assets/public/
+          echo '{"appId":"ir.chabooksaz.jabechin","appName":"پازل جعبه‌چین","webDir":"out","android":{"allowMixedContent":true},"server":{"androidScheme":"https"}}' > android/app/src/main/assets/capacitor.config.json
 
       - name: Decode keystore
         run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > android/app/chabooksaz-release-keystore.jks
