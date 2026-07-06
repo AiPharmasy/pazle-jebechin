@@ -1,13 +1,81 @@
-name: Build APK
+name: Build & Release APK
 
 on:
   push:
     branches:
       - main
+    tags:
+      - 'v*'
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Hello World"
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Build web app
+        run: npx next build
+
+      - name: Sync Capacitor
+        run: npx cap sync android
+
+      - name: Decode keystore
+        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > android/app/chabooksaz-release-keystore.jks
+
+      - name: Build release APK
+        working-directory: android
+        run: ./gradlew assembleRelease -Pandroid.injected.signing.store.file=app/chabooksaz-release-keystore.jks -Pandroid.injected.signing.store.password="${{ secrets.KEYSTORE_PASSWORD }}" -Pandroid.injected.signing.key.alias="${{ secrets.KEY_ALIAS }}" -Pandroid.injected.signing.key.password="${{ secrets.KEY_PASSWORD }}"
+
+      - name: Get version
+        id: version
+        run: |
+          VERSION=$(grep versionName android/app/build.gradle | head -1 | sed 's/.*versionName "//;s/"//')
+          CODE=$(grep versionCode android/app/build.gradle | head -1 | sed 's/.*versionCode //;s/ //')
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "code=$CODE" >> $GITHUB_OUTPUT
+
+      - name: Rename APK
+        run: cp android/app/build/outputs/apk/release/app-release.apk pazle-jebechin-v${{ steps.version.outputs.version }}-release.apk
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pazle-jebechin-apk
+          path: pazle-jebechin-v*-release.apk
+
+      - name: Create Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v1
+        with:
+          files: pazle-jebechin-v*-release.apk
+          name: پازل جعبه‌چین v${{ steps.version.outputs.version }}
+          body: |
+            ## نسخه ${{ steps.version.outputs.version }}
+
+            فایل APK را دانلود و روی گوشی اندروید نصب کنید.
+
+            - Package: ir.chabooksaz.jabechin
+            - Version: ${{ steps.version.outputs.version }} (${{ steps.version.outputs.code }})
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
