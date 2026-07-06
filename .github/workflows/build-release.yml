@@ -29,10 +29,7 @@ jobs:
           packages: 'platform-tools platforms;android-34 build-tools;34.0.0'
 
       - name: Install dependencies
-        run: npm install
-
-      - name: Install Capacitor
-        run: npm install @capacitor/core @capacitor/cli @capacitor/android
+        run: npm install --legacy-peer-deps
 
       - name: Build web app
         run: npx next build
@@ -85,8 +82,8 @@ jobs:
             فایل APK را دانلود و روی گوشی اندروید نصب کنید.
 
             ### اطلاعات
-            - Package: `ir.chabooksaz.jabechin`
-            - Version: ${{ steps.version.output.version }} (${{ steps.version.outputs.code }})
+            - Package: ir.chabooksaz.jabechin
+            - Version: ${{ steps.version.outputs.version }} (${{ steps.version.outputs.code }})
           draft: false
           prerelease: false
         env:
